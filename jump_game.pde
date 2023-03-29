@@ -3,7 +3,7 @@ Play play;
 String currScreen;
 
 void setup() {
-  size(400, 600);
+  size(800, 600);
   currScreen = "menu";
   
   menu = new Menu();
@@ -20,7 +20,7 @@ void draw() {
   // set current screen to play mode
   else if (currScreen == "play") {
     play.display();
-    play.update();
+    //play.update();
   } 
   // set current screen to leaderboard page
   else if (currScreen == "leaderboard") {
@@ -40,14 +40,14 @@ void keyPressed() {
     play = new Play();
   }
   // move player based on keyPressed
-  if (currScreen == "play" && key == CODED) {
-    if (keyCode == RIGHT) {
-      play.moveRight();
-    }
-    if (keyCode == LEFT) {
-      play.moveLeft();
-    }
-  }
+  //if (currScreen == "play" && key == CODED) {
+  //  if (keyCode == RIGHT) {
+  //    play.moveRight();
+  //  }
+  //  if (keyCode == LEFT) {
+  //    play.moveLeft();
+  //  }
+  //}
 
 }
 
