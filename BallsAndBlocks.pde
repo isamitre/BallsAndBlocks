@@ -1,9 +1,10 @@
 Menu menu;
 Play play;
 String currScreen;
+color[] colors = new color[]{#355070, #6D5976, #B56576, #E56B6F, #EAAC8B};
 
 void setup() {
-  size(800, 600);
+  size(600, 400);
   currScreen = "menu";
   
   menu = new Menu();
@@ -20,7 +21,7 @@ void draw() {
   // set current screen to play mode
   else if (currScreen == "play") {
     play.display();
-    //play.update();
+    play.update();
   } 
   // set current screen to leaderboard page
   else if (currScreen == "leaderboard") {
@@ -40,14 +41,14 @@ void keyPressed() {
     play = new Play();
   }
   // move player based on keyPressed
-  //if (currScreen == "play" && key == CODED) {
-  //  if (keyCode == RIGHT) {
-  //    play.moveRight();
-  //  }
-  //  if (keyCode == LEFT) {
-  //    play.moveLeft();
-  //  }
-  //}
+  if (currScreen == "play" && key == CODED) {
+    if (keyCode == RIGHT) {
+      play.moveRight();
+    }
+    if (keyCode == LEFT) {
+      play.moveLeft();
+    }
+  }
 
 }
 
