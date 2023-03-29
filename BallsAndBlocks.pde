@@ -1,19 +1,21 @@
 Menu menu;
 Play play;
 String currScreen;
+PImage im;
 color[] colors = new color[]{#355070, #6D5976, #B56576, #E56B6F, #EAAC8B};
 
 void setup() {
   size(600, 400);
   currScreen = "menu";
-  
+
   menu = new Menu();
   play = new Play();
+  im = loadImage("ocean-background.png");
 }
 
 void draw() {
-  background(250);
-  
+  image(im, 0, 0, width, height);
+
   // set current screen to main menu
   if (currScreen == "menu") {
     menu.display();
@@ -21,7 +23,6 @@ void draw() {
   // set current screen to play mode
   else if (currScreen == "play") {
     play.display();
-    play.update();
   } 
   // set current screen to leaderboard page
   else if (currScreen == "leaderboard") {
@@ -40,16 +41,6 @@ void keyPressed() {
     currScreen = "menu";
     play = new Play();
   }
-  // move player based on keyPressed
-  if (currScreen == "play" && key == CODED) {
-    if (keyCode == RIGHT) {
-      play.moveRight();
-    }
-    if (keyCode == LEFT) {
-      play.moveLeft();
-    }
-  }
-
 }
 
 void mousePressed() {
