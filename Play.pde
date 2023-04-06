@@ -41,7 +41,7 @@ class Play {
     if (elapsedTime > spawnTime*1000) {
       if (blocks.size() < maxBlocks ) {
         // add block
-        blocks.add(new Block(random(30, width-30), random(0, height/3)));
+        blocks.add(new Block(random(30, width-30), random(30, height/3)));
         spawnTime = max(spawnTime/3, 2);
         time = millis();
       } else {
