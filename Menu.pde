@@ -3,7 +3,6 @@ class Menu {
   Button diffBtn;
   Button leaderboardBtn;
   
-  
   public Menu() {
     playBtn = new Button(width/2, height/5, 100, 50, "play");
     diffBtn = new Button(width/2, height/2, 70, 40, "easy");
