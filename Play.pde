@@ -3,7 +3,9 @@ class Play {
   Player p;
   Button pauseBtn;
   float y, x, vy, g;
-  int numBlocks;
+  int time;
+  float spawnTime;
+  int numDisplayedBlocks;
   Block[] blocks = new Block[10];
   
   public Play() {
@@ -13,11 +15,13 @@ class Play {
     x = width/2;
     vy = 0;
     g = 0.5;
+    time = millis();
+    spawnTime = 10;
+    numDisplayedBlocks = 0;
     // create blocks
     for (int i = 0; i < blocks.length; i++) {
       blocks[i] = new Block(random(30, width-30), random(0, height/3));
     }
-    numBlocks = 0;
   }
 
   public void display() {
@@ -48,6 +52,12 @@ class Play {
     rect(mouseX, mouseY, 50, 10);
     
     displayBlocks();
+    int elapsedTime = millis() - time;
+    if (numDisplayedBlocks < 10 && elapsedTime > spawnTime*1000) {
+      numDisplayedBlocks++;
+      spawnTime = max(spawnTime/3, 2);
+      time = millis();
+    }
   }
 
   void gameRestart()
@@ -56,7 +66,7 @@ class Play {
   }
   
   void displayBlocks() {
-    for (int i = 0; i < blocks.length; i++) {
+    for (int i = 0; i < numDisplayedBlocks; i++) {
       blocks[i].display();
     }
   }
