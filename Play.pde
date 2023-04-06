@@ -1,6 +1,5 @@
 class Play {
 
-  Player p;
   Button pauseBtn;
   float y, x, vy, g;
   int time;
@@ -9,7 +8,6 @@ class Play {
   Block[] blocks = new Block[10];
   
   public Play() {
-    p = new Player(width/2, height*0.8);
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
     y = 50;
     x = width/2;
