@@ -7,17 +7,19 @@ class Play {
   float spawnTime;
   int maxBlocks;
   ArrayList<Block> blocks;
+  PImage hand;
   
   
   public Play() {
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
     barX = 100;
-    barY = 20;
+    barY = 40;
     cat = new Cat(300, 50, barX, barY);
     time = millis();
     spawnTime = 10;
     maxBlocks = 10;
     blocks = new ArrayList<Block>();
+    hand = loadImage("hand.png");
   }
 
   public void display() {
@@ -27,8 +29,9 @@ class Play {
     rect(width/2, height, width, height/2);
 
     fill(0);
-
-    rect(mouseX, mouseY, barX, barY);
+    
+    imageMode(CENTER);
+    image(hand, mouseX, mouseY, barX, barY);
     cat.update();
     cat.display();
     
