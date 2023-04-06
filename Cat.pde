@@ -22,6 +22,7 @@ class Cat {
     vy +=g;
     x += vx;
     
+    //Check for bar collision
     if (y + diam >=height) {
       text("GAME OVER", width/2, height/2);
     } 
@@ -30,6 +31,11 @@ class Cat {
       vy = -10;
       y = mouseY-barY/2-diam/2;
       vx = map(x, mouseX-barX/2, mouseX+barX/2, -5, 5);
+    }
+    
+    //Wall collision
+    if(x<=0 || x >=width){
+      vx = -vx;
     }
     
     angle += 0.05;
