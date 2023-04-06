@@ -10,7 +10,6 @@ class Play {
   
   
   public Play() {
-    cat = new Cat(300, 50);
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
     barX = 100;
     barY = 20;
