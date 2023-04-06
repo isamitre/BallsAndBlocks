@@ -1,5 +1,5 @@
 class Cat {
-  float x, y, vy, g;
+  float x, y, vy, vx, g;
   float diam;
   float angle;
   PImage icon;
@@ -11,6 +11,7 @@ class Cat {
     barY = by;
     g = 0.3;
     vy = 0;
+    vx = 0;
     diam = 25;
     angle = random(0, TWO_PI);
     icon = loadImage("cat1.png");
@@ -19,6 +20,7 @@ class Cat {
   void update(){
     y += vy;
     vy +=g;
+    x += vx;
     
     if (y + diam >=height) {
       text("GAME OVER", width/2, height/2);
@@ -27,6 +29,7 @@ class Cat {
     && x>=mouseX-barX/2 && x<=mouseX+barX/2 && vy>0) {
       vy = -10;
       y = mouseY-barY/2-diam/2;
+      vx = map(x, mouseX-barX/2, mouseX+barX/2, -5, 5);
     }
     
     angle += 0.05;
