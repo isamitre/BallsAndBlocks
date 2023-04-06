@@ -3,10 +3,13 @@ class Cat {
   float diam;
   float angle;
   PImage icon;
-  public Cat(float x, float y) {
+  float barX, barY;
+  public Cat(float x, float y, float bx, float by) {
     this.x = x;
     this.y = y;
-    g = 0.5;
+    barX = bx;
+    barY = by;
+    g = 0.3;
     vy = 0;
     diam = 25;
     angle = random(0, TWO_PI);
@@ -14,18 +17,19 @@ class Cat {
   }
   
   void update(){
-    y += vy + g/2;
+    y += vy;
     vy +=g;
     
-    if (y + diam/2 >=height) {
+    if (y + diam >=height) {
       text("GAME OVER", width/2, height/2);
-    } else if (y + diam/2>=mouseY && x>mouseX-diam/2 && x<mouseX+diam/2 && vy>0) {
-      vy = -13;
-      y = mouseY-diam/2;
+    } 
+    else if (y + diam/2>= mouseY-barY/2-10 && y + diam/2 <= mouseY+barY/2+10 
+    && x>=mouseX-barX/2 && x<=mouseX+barX/2 && vy>0) {
+      vy = -10;
+      y = mouseY-barY/2-diam/2;
     }
     
     angle += 0.05;
-    
   }
   void display(){
     pushMatrix();

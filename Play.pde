@@ -2,7 +2,7 @@ class Play {
 
   Cat cat;
   Button pauseBtn;
-  float y, x, vy, g;
+  float barX, barY;
   int time;
   float spawnTime;
   int maxBlocks;
@@ -10,12 +10,10 @@ class Play {
   
   
   public Play() {
-    cat = new Cat(300, 50);
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
-    y = 50;
-    x = width/2;
-    vy = 0;
-    g = 0.5;
+    barX = 100;
+    barY = 20;
+    cat = new Cat(300, 50, barX, barY);
     time = millis();
     spawnTime = 10;
     maxBlocks = 10;
@@ -30,7 +28,7 @@ class Play {
 
     fill(0);
 
-    rect(mouseX, mouseY, 50, 10);
+    rect(mouseX, mouseY, barX, barY);
     cat.update();
     cat.display();
     
