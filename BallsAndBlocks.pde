@@ -14,8 +14,9 @@ void setup() {
 }
 
 void draw() {
+  imageMode(CORNER);
   image(im, 0, 0, width, height);
-
+  
   // set current screen to main menu
   if (currScreen == "menu") {
     menu.display();

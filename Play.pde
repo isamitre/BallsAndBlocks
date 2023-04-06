@@ -1,14 +1,20 @@
 class Play {
 
   Button pauseBtn;
+<<<<<<< HEAD
   float y, x, vy, g;
   int time;
   float spawnTime;
   int numDisplayedBlocks;
+=======
+  Cat cat = new Cat(300, 50);
+  int numBlocks;
+>>>>>>> main
   Block[] blocks = new Block[10];
   
   public Play() {
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
+<<<<<<< HEAD
     y = 50;
     x = width/2;
     vy = 0;
@@ -16,6 +22,8 @@ class Play {
     time = millis();
     spawnTime = 10;
     numDisplayedBlocks = 0;
+=======
+>>>>>>> main
     // create blocks
     for (int i = 0; i < blocks.length; i++) {
       blocks[i] = new Block(random(30, width-30), random(0, height/3));
@@ -28,27 +36,11 @@ class Play {
     fill(#A8FF9D);
     rect(width/2, height, width, height/2);
 
-    y += vy + g/2;
-    vy +=g;
-    println("velocity: "+vy);
-    println("y: "+y);
     fill(0);
-    ellipse(x, y, 50, 50);
-
-    //bouncing
-    if (y + 25>=height) {
-      text("GAME OVER", width/2, height/2);
-      if (mouseX == width/2 && mouseY == height/2)
-      {
-        gameRestart();
-      }
-    } else if (y + 25>=mouseY && x>mouseX-25 && x<mouseX+25 && vy>0) {
-      vy = -13;
-      y = mouseY-25;
-    }
 
     rect(mouseX, mouseY, 50, 10);
-    
+    cat.update();
+    cat.display();
     displayBlocks();
     int elapsedTime = millis() - time;
     if (numDisplayedBlocks < 10 && elapsedTime > spawnTime*1000) {
@@ -58,10 +50,6 @@ class Play {
     }
   }
 
-  void gameRestart()
-  {
-    ellipse(x, y, 50, 50);
-  }
   
   void displayBlocks() {
     for (int i = 0; i < numDisplayedBlocks; i++) {
