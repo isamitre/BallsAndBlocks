@@ -2,9 +2,10 @@ class Play {
 
   Player p;
   Button pauseBtn;
-  Cat cat = new Cat(300, 50);
+  Cat cat;
   int numBlocks;
   Block[] blocks = new Block[10];
+  float barX, barY;
   
   public Play() {
     p = new Player(width/2, height*0.8);
@@ -14,6 +15,9 @@ class Play {
       blocks[i] = new Block(random(30, width-30), random(0, height/3));
     }
     numBlocks = 0;
+    barX = 100;
+    barY = 20;
+    cat = new Cat(300, 50, barX, barY);
   }
 
   public void display() {
@@ -24,7 +28,7 @@ class Play {
 
     fill(0);
 
-    rect(mouseX, mouseY, 50, 10);
+    rect(mouseX, mouseY, barX, barY);
     cat.update();
     cat.display();
     displayBlocks();
