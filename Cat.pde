@@ -4,6 +4,8 @@ class Cat {
   float angle;
   PImage icon;
   float barX, barY;
+  float spinSpeed = 0.1;
+  
   public Cat(float x, float y, float bx, float by) {
     this.x = x;
     this.y = y;
@@ -38,8 +40,11 @@ class Cat {
       vx = -vx;
     }
     
-    angle += 0.05;
+    //Add angle to have cat rotating
+    angle += spinSpeed;
   }
+  
+  //Draw the cat
   void display(){
     pushMatrix();
     translate(x, y);
