@@ -5,6 +5,7 @@ class Cat {
   PImage icon;
   float barX, barY;
   float spinSpeed = 0.1;
+  boolean isEasy;
   
   public Cat(float x, float y, float bx, float by) {
     this.x = x;
@@ -42,6 +43,15 @@ class Cat {
     
     //Add angle to have cat rotating
     angle += spinSpeed;
+    
+    // update difficulty
+    if (isEasy) { 
+      // easy mode: move slowly
+      // TODO: 
+    } else {
+      // hard mode: move quickly
+      // TODO: 
+    }
   }
   
   //Draw the cat
