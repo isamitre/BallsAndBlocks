@@ -7,9 +7,14 @@ class Play {
   float spawnTime;
   int maxBlocks;
   ArrayList<Block> blocks;
+<<<<<<< HEAD
+
+
+=======
   PImage hand;
   
   
+>>>>>>> main
   public Play() {
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
     barX = 100;
@@ -19,7 +24,12 @@ class Play {
     spawnTime = 10;
     maxBlocks = 10;
     blocks = new ArrayList<Block>();
+<<<<<<< HEAD
+    Block newBlock = new Block(width/2, 20);
+    blocks.add(newBlock);
+=======
     hand = loadImage("hand.png");
+>>>>>>> main
   }
 
   public void display() {
@@ -34,28 +44,59 @@ class Play {
     image(hand, mouseX, mouseY, barX, barY);
     cat.update();
     cat.display();
-    
-    rectMode(CORNER);
+
+
     // block handling
+    handleBlocks();
+  }
+
+  void handleBlocks() {
     displayBlocks();
+    handleBlockCollisions(cat);
+  }
+
+  void displayBlocks() {
+    rectMode(CORNER);
+    // time handling inspired by
+    // https://stackoverflow.com/questions/12417937/create-a-simple-countdown-in-processing
+    // blocks appear every spawnTime
     int elapsedTime = millis() - time;
     if (elapsedTime > spawnTime*1000) {
       if (blocks.size() < maxBlocks ) {
         // add block
         blocks.add(new Block(random(30, width-30), random(30, height/3)));
+        // spawnTime decreases until it is 2 seconds
         spawnTime = max(spawnTime/3, 2);
-        time = millis();
       } else {
         // remove block
         blocks.remove(0);
-        time = millis();
       }
-    } 
+      // reset timer
+      time = millis();
+    }
+
+    // display blocks
+    for (Block currBlock : blocks) {
+      currBlock.display();
+    }
   }
-  
-  void displayBlocks() {
-    for (int i = 0; i < blocks.size(); i++) {
-      blocks.get(i).display();
+
+  void handleBlockCollisions(Cat currCat) {
+    for (Block currBlock : blocks) {
+      // vertical block collision with cat, change cat's y direction
+      if ( (currCat.x+currCat.diam/2) >= currBlock.x
+        && (currCat.x-currCat.diam/2) <= (currBlock.x+currBlock.diam)
+        && (currCat.y >= currBlock.y)
+        && currCat.y <= (currBlock.y+currBlock.diam)) {
+        currCat.vy = -currCat.vy;
+      }
+      // horizontal block collision with cat, change cat's x direction
+      if ( (currCat.y+currCat.diam/2) >= currBlock.y
+        && (currCat.y-currCat.diam/2) <= (currBlock.y+currBlock.diam)
+        && (currCat.x >= currBlock.x)
+        && currCat.x <= (currBlock.x+currBlock.diam)) {
+        //currCat.vx = -currCat.vx;
+      }
     }
   }
 }
