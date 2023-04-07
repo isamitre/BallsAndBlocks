@@ -22,7 +22,7 @@ class Play {
     barY = 40;
 
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
-    cat = new Cat(300, 50, barX, barY);
+    cat = new Cat(300, 50, barX, barY, isEasy);
     
     blockTimer = millis();
     if (isEasy) {
