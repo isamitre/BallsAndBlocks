@@ -7,8 +7,8 @@ class Play {
   float spawnTime;
   int maxBlocks;
   ArrayList<Block> blocks;
-  
-  
+
+
   public Play() {
     cat = new Cat(300, 50);
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
@@ -20,6 +20,8 @@ class Play {
     spawnTime = 10;
     maxBlocks = 10;
     blocks = new ArrayList<Block>();
+    Block newBlock = new Block(width/2, 20);
+    blocks.add(newBlock);
   }
 
   public void display() {
@@ -33,28 +35,52 @@ class Play {
     rect(mouseX, mouseY, 50, 10);
     cat.update();
     cat.display();
-    
-    rectMode(CORNER);
+
+
     // block handling
+    handleBlocks();
+  }
+
+  void handleBlocks() {
     displayBlocks();
+    handleBlockCollisions(cat);
+  }
+
+  void displayBlocks() {
+    rectMode(CORNER);
+    // time handling inspired by
+    // https://stackoverflow.com/questions/12417937/create-a-simple-countdown-in-processing
+    // blocks appear every spawnTime
     int elapsedTime = millis() - time;
     if (elapsedTime > spawnTime*1000) {
       if (blocks.size() < maxBlocks ) {
         // add block
         blocks.add(new Block(random(30, width-30), random(30, height/3)));
+        // spawnTime decreases until it is 2 seconds
         spawnTime = max(spawnTime/3, 2);
-        time = millis();
       } else {
         // remove block
         blocks.remove(0);
-        time = millis();
       }
-    } 
+      // reset timer
+      time = millis();
+    }
+
+    // display blocks
+    for (Block currBlock : blocks) {
+      currBlock.display();
+    }
   }
-  
-  void displayBlocks() {
-    for (int i = 0; i < blocks.size(); i++) {
-      blocks.get(i).display();
+
+  void handleBlockCollisions(Cat currCat) {
+    for (Block currBlock : blocks) {
+      // cat touching block's top or bottom edge, change y direction
+      if ( (currCat.x+currCat.diam/2) >= currBlock.x
+        && (currCat.x-currCat.diam/2) <= (currBlock.x+currBlock.diam)
+        && (currCat.y >= currBlock.y)
+        && currCat.y <= (currBlock.y+currBlock.diam)) {
+        currCat.vy = -currCat.vy;
+      }
     }
   }
 }
