@@ -8,6 +8,7 @@ class Play {
   int maxBlocks;
   ArrayList<Block> blocks;
   PImage hand;
+  PImage bg;
   
   
   public Play() {
@@ -20,15 +21,14 @@ class Play {
     maxBlocks = 10;
     blocks = new ArrayList<Block>();
     hand = loadImage("hand.png");
+    bg = loadImage("ocean-background.png");
   }
 
   public void display() {
-    background(255);
+    imageMode(CORNER);
+    image(bg, 0, 0, width, height);
     rectMode(CENTER);
-    fill(#A8FF9D);
-    rect(width/2, height, width, height/2);
 
-    fill(0);
     
     imageMode(CENTER);
     image(hand, mouseX, mouseY, barX, barY);
