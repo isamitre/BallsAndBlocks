@@ -1,7 +1,7 @@
 class Block {
   float x, y;
   float xB, yB;
-  float diam = 30;
+  float diam = 20;
   
   public Block(float x, float y) {
     this.x = x;
@@ -12,6 +12,6 @@ class Block {
   
   void display() {
     fill(0);
-    rect(x, y, diam/2, diam/2);
+    rect(x, y, diam, diam);
   }
 }
