@@ -2,26 +2,34 @@ class Play {
 
   Cat cat;
   Button pauseBtn;
-  float y, x, vy, g;
+  float barX, barY;
   int time;
   float spawnTime;
   int maxBlocks;
   ArrayList<Block> blocks;
+<<<<<<< HEAD
 
 
+=======
+  PImage hand;
+  
+  
+>>>>>>> main
   public Play() {
-    cat = new Cat(300, 50);
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
-    y = 50;
-    x = width/2;
-    vy = 0;
-    g = 0.5;
+    barX = 100;
+    barY = 40;
+    cat = new Cat(300, 50, barX, barY);
     time = millis();
     spawnTime = 10;
     maxBlocks = 10;
     blocks = new ArrayList<Block>();
+<<<<<<< HEAD
     Block newBlock = new Block(width/2, 20);
     blocks.add(newBlock);
+=======
+    hand = loadImage("hand.png");
+>>>>>>> main
   }
 
   public void display() {
@@ -31,8 +39,9 @@ class Play {
     rect(width/2, height, width, height/2);
 
     fill(0);
-
-    rect(mouseX, mouseY, 50, 10);
+    
+    imageMode(CENTER);
+    image(hand, mouseX, mouseY, barX, barY);
     cat.update();
     cat.display();
 
