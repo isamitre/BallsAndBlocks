@@ -9,8 +9,8 @@ class Play {
   ArrayList<Block> blocks;
   PImage hand;
   PImage bg;
-  
-  
+
+
   public Play() {
     pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
     barX = 100;
@@ -25,20 +25,15 @@ class Play {
   }
 
   public void display() {
+    // background
     imageMode(CORNER);
     image(bg, 0, 0, width, height);
-    rectMode(CENTER);
-<<<<<<< HEAD
-    fill(#A8FF9D);
-    rect(width/2, height, width, height/2);
-    
-    fill(0);
-=======
 
->>>>>>> main
-    
+    // player-controlled hand
     imageMode(CENTER);
     image(hand, mouseX, mouseY, barX, barY);
+
+    //  cat
     cat.update();
     cat.display();
 
