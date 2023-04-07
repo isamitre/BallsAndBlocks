@@ -3,23 +3,41 @@ class Play {
   Cat cat;
   Button pauseBtn;
   float barX, barY;
-  int time;
-  float spawnTime;
+  
+  int blockTimer;
+  int blockSpawnTime;
+  int minBlockSpawnTime;
   int maxBlocks;
   ArrayList<Block> blocks;
+  
   PImage hand;
   PImage bg;
+  boolean isEasy;
 
 
-  public Play() {
-    pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
+  public Play(boolean isEasy) {
+    this.isEasy = isEasy;
+    
     barX = 100;
     barY = 40;
+
+    pauseBtn = new Button(width*0.9, 30, 35, 35, "||");
     cat = new Cat(300, 50, barX, barY);
-    time = millis();
-    spawnTime = 10;
-    maxBlocks = 10;
+    
+    blockTimer = millis();
+    if (isEasy) {
+      // easy mode
+      blockSpawnTime = 10;
+      minBlockSpawnTime = 2;
+      maxBlocks = 10;
+    } else {
+      // hard mode
+      blockSpawnTime = 6;
+      minBlockSpawnTime = 1;
+      maxBlocks = 15;
+    }
     blocks = new ArrayList<Block>();
+    
     hand = loadImage("hand.png");
     bg = loadImage("ocean-background.png");
   }
@@ -40,6 +58,11 @@ class Play {
     // block handling
     handleBlocks();
   }
+  
+  void updateDifficulty(boolean isEasy) {
+    this.isEasy = isEasy;
+    cat.isEasy = isEasy;
+  }
 
   void handleBlocks() {
     displayBlocks();
@@ -50,20 +73,21 @@ class Play {
     rectMode(CORNER);
     // time handling inspired by
     // https://stackoverflow.com/questions/12417937/create-a-simple-countdown-in-processing
-    // blocks appear every spawnTime
-    int elapsedTime = millis() - time;
-    if (elapsedTime > spawnTime*1000) {
+    
+    // blocks appear every blockSpawnTime
+    int elapsedTime = millis() - blockTimer;
+    if (elapsedTime > blockSpawnTime*1000) {
       if (blocks.size() < maxBlocks ) {
         // add block
         blocks.add(new Block(random(30, width-30), random(30, height/3)));
-        // spawnTime decreases until it is 2 seconds
-        spawnTime = max(spawnTime/3, 2);
+        // blockSpawnTime decreases until it is 2 seconds
+        blockSpawnTime = max(blockSpawnTime/3, 2);
       } else {
         // remove block
         blocks.remove(0);
       }
-      // reset timer
-      time = millis();
+      // reset blockTimer
+      blockTimer = millis();
     }
 
     // display blocks

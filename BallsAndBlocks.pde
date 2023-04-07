@@ -10,7 +10,7 @@ void setup() {
   currScreen = "menu";
 
   menu = new Menu();
-  play = new Play();
+  play = new Play(true);
   pause = new Pause();
   im = loadImage("ocean-background.png");
 }
@@ -26,6 +26,7 @@ void draw() {
   // set current screen to play mode
   else if (currScreen == "play") {
     play.display();
+    play.updateDifficulty(menu.isEasy);
   }
   else if (currScreen == "pause") {
     pause.display();
@@ -54,7 +55,7 @@ void mousePressed() {
     currScreen = menu.update(currScreen);
     // reset play if coming from menu
     if (currScreen == "play") {
-      play = new Play();
+      play = new Play(menu.isEasy);
     }
   }
   
