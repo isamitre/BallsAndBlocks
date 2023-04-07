@@ -73,17 +73,17 @@ class Play {
   void handleBlockCollisions(Cat currCat) {
     for (Block currBlock : blocks) {
       // vertical block collision with cat, change cat's y direction
-      if ( (currCat.x+currCat.diam) >= currBlock.x
-        && (currCat.x-currCat.diam) <= (currBlock.x+currBlock.diam)
-        && (currCat.y >= currBlock.y)
-        && currCat.y <= (currBlock.y+currBlock.diam)) {
+      if ( (currCat.x+currCat.diam/2) >= currBlock.x
+        && (currCat.x-currCat.diam/2) <= (currBlock.x+currBlock.diam)
+        && (currCat.y+currCat.diam/2) >= currBlock.y
+        && (currCat.y-currCat.diam/2) <= (currBlock.y+currBlock.diam)) {
         currCat.vy = -currCat.vy;
       }
       // horizontal block collision with cat, change cat's x direction
-      if ( (currCat.y+currCat.diam) >= currBlock.y
-        && (currCat.y-currCat.diam) <= (currBlock.y+currBlock.diam)
-        && (currCat.x >= currBlock.x)
-        && currCat.x <= (currBlock.x+currBlock.diam)) {
+      if ( (currCat.y+currCat.diam/2) >= currBlock.y
+        && (currCat.y-currCat.diam/2) <= (currBlock.y+currBlock.diam)
+        && (currCat.x+currCat.diam/2) >= currBlock.x
+        && (currCat.x-currCat.diam/2) <= (currBlock.x+currBlock.diam)) {
         currCat.vx = -currCat.vx;
       }
     }
