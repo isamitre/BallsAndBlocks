@@ -27,7 +27,7 @@ class Play {
     rectMode(CENTER);
     fill(#A8FF9D);
     rect(width/2, height, width, height/2);
-
+    
     fill(0);
     
     imageMode(CENTER);

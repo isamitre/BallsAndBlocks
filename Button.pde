@@ -13,6 +13,7 @@ class Button {
     this.h = h;
     this.text = text;
 
+    rectMode(CENTER);
     textAlign(CENTER, CENTER);
     textSize(20);
 }
@@ -23,7 +24,7 @@ class Button {
     } else {
       fill(200);
     }
-    ellipse(x, y, w, h);
+    rect(x, y, w, h, 30);
     fill(0);
     text(text, x, y-3);
   }

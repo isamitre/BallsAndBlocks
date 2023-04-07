@@ -1,5 +1,6 @@
 Menu menu;
 Play play;
+Pause pause;
 String currScreen;
 PImage im;
 color[] colors = new color[]{#355070, #6D5976, #B56576, #E56B6F, #EAAC8B};
@@ -10,6 +11,7 @@ void setup() {
 
   menu = new Menu();
   play = new Play();
+  pause = new Pause();
   im = loadImage("ocean-background.png");
 }
 
@@ -24,7 +26,10 @@ void draw() {
   // set current screen to play mode
   else if (currScreen == "play") {
     play.display();
-  } 
+  }
+  else if (currScreen == "pause") {
+    pause.display();
+  }
   // set current screen to leaderboard page
   else if (currScreen == "leaderboard") {
     background(#6B7BB7);
@@ -38,23 +43,23 @@ void draw() {
 }
 
 void keyPressed() {
-  if (key == ' ') {
-    currScreen = "menu";
-    play = new Play();
+  if (currScreen == "play" && key == ' ') {
+    currScreen = "pause";
   }
 }
 
 void mousePressed() {
   // menu's button functionality
   if (currScreen == "menu") {
-    if (menu.playBtn.mouseOver()) {
-      currScreen = "play";
+    currScreen = menu.update(currScreen);
+    // reset play if coming from menu
+    if (currScreen == "play") {
+      play = new Play();
     }
-    if (menu.leaderboardBtn.mouseOver()) {
-      currScreen = "leaderboard";
-    }
-    if (menu.diffBtn.mouseOver()) {
-      menu.changeDifficulty();
-    }
+  }
+  
+  // pause's button functionality
+  if (currScreen == "pause") {
+    currScreen = pause.update(currScreen);
   }
 }
