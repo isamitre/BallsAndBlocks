@@ -19,7 +19,7 @@ class Pause {
     menuBtn.display();
   }
 
-  public String update(String currScreen) {
+  public String updateScreen(String currScreen) {
     if (gameBtn.mouseOver()) {
       return "play";
     }
