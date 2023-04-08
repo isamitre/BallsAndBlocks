@@ -11,9 +11,13 @@ class Leaderboard {
 
   public void display() {
     rectMode(CENTER);
+    
+    // outer rectangle
     noFill();
     strokeWeight(3);
     rect(width/2, height/2, width*0.8, height*0.8, 20);
+    
+    // leaderboard rectangle
     fill(#8fb8ea);
     rect(width/2, height*0.1, 150, 50, 20);
     textAlign(CENTER, CENTER);
@@ -35,13 +39,21 @@ class Leaderboard {
     }
   }
 
+  // adds entry to topEntries
   public void addEntry(String username, int points) {
     Entry entry = new Entry(username, points);
-
-    if (topEntries.size() < maxPlayers) {
+    
+    // adds if there are less than maxPlayers or if points is greater than existing points on leaderboard
+    if (topEntries.size() < maxPlayers || getLastEntry().getPoints() < points) {
       topEntries.add(entry);
       Collections.sort(topEntries, new SortByPoints());
     }
+    
+    // remove entries after maxPlayers
+    if (topEntries.size() > maxPlayers) {
+      topEntries.remove(maxPlayers);
+    }
+
   }
 
   public Entry getLastEntry() {
