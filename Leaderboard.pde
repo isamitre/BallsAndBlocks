@@ -7,6 +7,8 @@ class Leaderboard {
   public Leaderboard() {
     maxPlayers = 5;
     topEntries = new ArrayList<Entry>();
+    topEntries.add(new Entry("isamitre", 100));
+    topEntries.add(new Entry("paumitre", 80));
   }
   
   public void display() {
@@ -24,8 +26,9 @@ class Leaderboard {
     textAlign(LEFT);
     for (int i = 1; i <= min(maxPlayers, topEntries.size()); i++) {
       Entry currEntry = topEntries.get(i-1);
-      String line = i + "\t" + currEntry.getUsername() + "\t" + currEntry.getPoints();
-      text(line, width*0.3, height/3+i*30);
+      text(i, width*0.2,  height/4+i*40);
+      text(currEntry.getUsername(), width*0.3, height/4+i*40);
+      text(currEntry.getPoints(), width*0.65, height/4+i*40);
     }
     if (topEntries.size() == 0) {
       textAlign(CENTER);
