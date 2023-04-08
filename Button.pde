@@ -12,19 +12,20 @@ class Button {
     this.w = w;
     this.h = h;
     this.text = text;
-
-    rectMode(CENTER);
-    textAlign(CENTER, CENTER);
-    textSize(20);
 }
   
   public void display() {
+    rectMode(CENTER);
+    textAlign(CENTER, CENTER);
+    textSize(20);
+    strokeWeight(1);
+    
     if (mouseOver()) {
       fill(180);
     } else {
       fill(200);
     }
-    rect(x, y, w, h, 30);
+    rect(x, y, w, h, 20);
     fill(0);
     text(text, x, y-3);
   }

@@ -12,6 +12,7 @@ class Menu {
   }
 
   public void display() {
+    strokeWeight(1);
     rectMode(CENTER);
     // play button
     playBtn.display();
@@ -21,7 +22,7 @@ class Menu {
     leaderboardBtn.display();
   }
 
-  public String update(String currScreen) {
+  public String updateScreen(String currScreen) {
     if (playBtn.mouseOver()) {
       return "play";
     }

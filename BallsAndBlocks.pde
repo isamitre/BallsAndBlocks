@@ -1,6 +1,7 @@
 Menu menu;
 Play play;
 Pause pause;
+Leaderboard leaderboard;
 String currScreen;
 PImage im;
 color[] colors = new color[]{#355070, #6D5976, #B56576, #E56B6F, #EAAC8B};
@@ -10,7 +11,8 @@ void setup() {
   currScreen = "menu";
 
   menu = new Menu();
-  play = new Play(true);
+  leaderboard = new Leaderboard();
+  play = new Play(true, leaderboard);
   pause = new Pause();
   im = loadImage("ocean-background.png");
 }
@@ -33,8 +35,7 @@ void draw() {
   }
   // set current screen to leaderboard page
   else if (currScreen == "leaderboard") {
-    background(#6B7BB7);
-    text("LEADERBOARD", width/2, height/2);
+    leaderboard.display();
   }
   // set current screen to gameover page
   else if (currScreen == "gameover") {
@@ -44,23 +45,37 @@ void draw() {
 }
 
 void keyPressed() {
-  if (currScreen == "play" && key == ' ') {
-    currScreen = "pause";
+  if (currScreen == "play") {
+    if (key == ' ') {
+      currScreen = "pause";
+    }
+    if (play.gameover) {
+      play.typeName();
+    }
   }
 }
 
 void mousePressed() {
   // menu's button functionality
   if (currScreen == "menu") {
-    currScreen = menu.update(currScreen);
+    currScreen = menu.updateScreen(currScreen);
     // reset play if coming from menu
     if (currScreen == "play") {
-      play = new Play(menu.isEasy);
+      play = new Play(menu.isEasy, leaderboard);
     }
   }
   
   // pause's button functionality
   if (currScreen == "pause") {
-    currScreen = pause.update(currScreen);
+    currScreen = pause.updateScreen(currScreen);
+  }
+  
+  if (currScreen == "play") {
+    currScreen = play.updateScreen(currScreen);
+    // reset play
+    if (currScreen == "play2") {
+      play = new Play(menu.isEasy, leaderboard);
+      currScreen = "play";
+    }
   }
 }
