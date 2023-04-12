@@ -27,6 +27,10 @@ class Button {
     }
     rect(x, y, w, h, 20);
     fill(0);
+    if (text == "—\n—\n—") {
+      // only applies to menu button in Leaderboard
+      textLeading(5);
+    }
     text(text, x, y-3);
   }
   

@@ -19,6 +19,7 @@ class Pause {
     menuBtn.display();
   }
 
+  // returns what currScreen should be
   public String updateScreen(String currScreen) {
     if (gameBtn.mouseOver()) {
       return "play";
