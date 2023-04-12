@@ -12,9 +12,8 @@ class Leaderboard {
     menuBtn = new Button(width*0.95, 30, 30, 30, "—\n—\n—");
     maxPlayers = 5;
     topEntries = new ArrayList<Entry>();  
-    
-    
-    // read entries from file
+        
+    // read entries from file and put into topEntries
     reader = createReader("data/leaderboard.txt");    
     getEntriesFromFile();
 }
@@ -36,6 +35,12 @@ class Leaderboard {
     textAlign(CENTER, CENTER);
     fill(0);
     text("LEADERBOARD", width/2, height*0.09);
+    
+    // if no one is on the leaderboard
+    if (topEntries.size() == 0) {
+      textAlign(CENTER);
+      text("There is no one on the leaderboard yet", width*0.5, height*0.4);
+    }
 
     // list top entries
     textAlign(LEFT);
@@ -45,10 +50,6 @@ class Leaderboard {
       text(i, width*0.2, height/4+i*40);
       text(currEntry.getUsername(), width*0.3, height/4+i*40);
       text(currEntry.getPoints(), width*0.65, height/4+i*40);
-    }
-    if (topEntries.size() == 0) {
-      textAlign(CENTER);
-      text("There is no one on the leaderboard yet", width*0.5, height*0.4);
     }
   }
   
@@ -93,7 +94,6 @@ class Leaderboard {
     // update file
     output = createWriter("data/leaderboard.txt"); 
     for (Entry currEntry : topEntries) {
-      println("adding");
       output.println(currEntry.getUsername() + "\t" + currEntry.getPoints());
     }
     output.flush();

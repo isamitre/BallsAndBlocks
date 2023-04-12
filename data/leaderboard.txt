@@ -1,2 +1,1 @@
-first	0
-2nd	0
+isa	0
