@@ -1,6 +1,9 @@
 import java.util.Collections;
+import java.io.File;
 
 class Leaderboard {
+  BufferedReader reader;
+  PrintWriter output;
   Button menuBtn;
   int maxPlayers;
   ArrayList<Entry> topEntries;
@@ -8,8 +11,13 @@ class Leaderboard {
   public Leaderboard() {
     menuBtn = new Button(width*0.95, 30, 30, 30, "—\n—\n—");
     maxPlayers = 5;
-    topEntries = new ArrayList<Entry>();
-  }
+    topEntries = new ArrayList<Entry>();  
+    
+    
+    // read entries from file
+    reader = createReader("data/leaderboard.txt");    
+    getEntriesFromFile();
+}
 
   public void display() {
     rectMode(CENTER);
@@ -18,7 +26,7 @@ class Leaderboard {
     menuBtn.display();
     
     // outer rectangle
-    noFill();
+    fill(255, 50);
     strokeWeight(3);
     rect(width/2, height/2, width*0.8, height*0.8, 20);
     
@@ -51,6 +59,21 @@ class Leaderboard {
     }
     return currScreen;
   }
+  
+  public void getEntriesFromFile() {
+    // https://processing.org/reference/createReader_.html
+    String line = null;
+    try {
+      while((line = reader.readLine()) != null) {
+        String[] entryComponents = split(line, TAB);
+        String username = entryComponents[0];
+        int points = int(entryComponents[1]);
+        topEntries.add(new Entry(username, points));
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   // adds entry to topEntries
   public void addEntry(String username, int points) {
@@ -66,6 +89,15 @@ class Leaderboard {
     if (topEntries.size() > maxPlayers) {
       topEntries.remove(maxPlayers);
     }
+    
+    // update file
+    output = createWriter("data/leaderboard.txt"); 
+    for (Entry currEntry : topEntries) {
+      println("adding");
+      output.println(currEntry.getUsername() + "\t" + currEntry.getPoints());
+    }
+    output.flush();
+    output.close();
 
   }
 
