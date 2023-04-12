@@ -56,7 +56,7 @@ void keyPressed() {
 }
 
 void mousePressed() {
-  // menu's button functionality
+  // menu screen button functionality
   if (currScreen == "menu") {
     currScreen = menu.updateScreen(currScreen);
     // reset play if coming from menu
@@ -65,11 +65,12 @@ void mousePressed() {
     }
   }
   
-  // pause's button functionality
+  // pause screen button functionality
   if (currScreen == "pause") {
     currScreen = pause.updateScreen(currScreen);
   }
   
+  // play screen button functionality
   if (currScreen == "play") {
     currScreen = play.updateScreen(currScreen);
     // reset play
@@ -77,5 +78,10 @@ void mousePressed() {
       play = new Play(menu.isEasy, leaderboard);
       currScreen = "play";
     }
+  }
+  
+  // leaderboard screen button functionality
+  if (currScreen == "leaderboard") {
+    currScreen = leaderboard.updateScreen(currScreen);
   }
 }

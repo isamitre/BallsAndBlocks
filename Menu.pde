@@ -22,6 +22,7 @@ class Menu {
     leaderboardBtn.display();
   }
 
+  // returns what currScreen should be
   public String updateScreen(String currScreen) {
     if (playBtn.mouseOver()) {
       return "play";

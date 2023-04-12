@@ -109,6 +109,7 @@ class Play {
     }
   }
   
+  // returns what currScreen should be
   public String updateScreen(String currScreen) {
     if ( !(!addedToLeaderboard && leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points)) {
       if (playAgainBtn.mouseOver()) {

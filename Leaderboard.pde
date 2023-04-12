@@ -1,16 +1,21 @@
 import java.util.Collections;
 
 class Leaderboard {
+  Button menuBtn;
   int maxPlayers;
   ArrayList<Entry> topEntries;
 
   public Leaderboard() {
+    menuBtn = new Button(width*0.95, 30, 30, 30, "—\n—\n—");
     maxPlayers = 5;
     topEntries = new ArrayList<Entry>();
   }
 
   public void display() {
     rectMode(CENTER);
+    
+    // menu button
+    menuBtn.display();
     
     // outer rectangle
     noFill();
@@ -37,6 +42,14 @@ class Leaderboard {
       textAlign(CENTER);
       text("There is no one on the leaderboard yet", width*0.5, height*0.4);
     }
+  }
+  
+  // returns what currScreen should be
+  public String updateScreen(String currScreen) {
+    if (menuBtn.mouseOver()) {
+      return "menu";
+    }
+    return currScreen;
   }
 
   // adds entry to topEntries
