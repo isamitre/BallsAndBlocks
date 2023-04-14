@@ -17,6 +17,8 @@ class Play {
   int maxBlocks;
   ArrayList<Block> blocks;
   
+  ArrayList<Treat> treats;
+  
   PImage hand;
   PImage bg;
   boolean isEasy;
@@ -53,6 +55,11 @@ class Play {
     }
     blocks = new ArrayList<Block>();
     
+    treats = new ArrayList<Treat>();
+    treats.add(new Treat(random(20, width-20), random(0, height/2)));
+    treats.add(new Treat(random(20, width-20), random(0, height/2)));
+    treats.add(new Treat(random(20, width-20), random(0, height/2)));
+    
     hand = loadImage("hand.png");
     bg = loadImage("ocean-background.png");
   }
@@ -74,6 +81,14 @@ class Play {
 
     // block handling
     handleBlocks();
+    
+    // treat handling
+    handleTreats();
+    
+    //display score
+    fill(0);
+    textAlign(CORNER);
+    text("Score: " + points, 5, height-10);
     
     // gameover
     gameover = cat.gameover;
@@ -175,7 +190,14 @@ class Play {
       currBlock.display();
     }
   }
-
+  
+  void handleTreats(){
+    for (Treat treat : treats) {
+      treat.display();
+    }
+    handleTreatCollision(cat);
+  }
+  
   void handleBlockCollisions(Cat currCat) {
     for (Block currBlock : blocks) {
       // vertical block collision with cat, change cat's y direction
@@ -191,6 +213,17 @@ class Play {
         && (currCat.x+currCat.diam/2) >= currBlock.x
         && (currCat.x-currCat.diam/2) <= (currBlock.x+currBlock.diam)) {
         currCat.vx = -currCat.vx;
+      }
+    }
+  }
+  
+  void handleTreatCollision(Cat currCat){
+    for (int i=0; i<treats.size(); i++) {
+      if(treats.get(i).isHittingTreat(currCat))
+      {
+        treats.remove(i);
+        points++;
+        treats.add(new Treat(random(20, width-20), random(0, height/2)));
       }
     }
   }

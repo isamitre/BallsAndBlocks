@@ -42,8 +42,7 @@ class Cat {
     
     //Check for bar collision
     if (y + diam >=height) {
-      text("GAME OVER", width/2, height/2);
-      gameover = true;
+      gameover = true; //IS THIS NECESSARY?
     } 
     else if (y + diam/2>= mouseY-barY/2-10 && y + diam/2 <= mouseY+barY/2+10 
     && x>=mouseX-barX/2 && x<=mouseX+barX/2 && vy>0) {
