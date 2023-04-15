@@ -70,4 +70,24 @@ class Cat {
     image(icon, 0, 0, diam, diam);
     popMatrix();
   }
+  
+  void handleBlockCollisions(ArrayList<Block> blocks) {
+    for (Block currBlock : blocks) {
+      // vertical block collision with cat, change cat's y direction
+      if ( (x+diam/2) >= currBlock.x
+        && (x-diam/2) <= (currBlock.x+currBlock.diam)
+        && (y+diam/2) >= currBlock.y
+        && (y-diam/2) <= (currBlock.y+currBlock.diam)) {
+        vy = -vy;
+      }
+      // horizontal block collision with cat, change cat's x direction
+      if ( (y+diam/2) >= currBlock.y
+        && (y-diam/2) <= (currBlock.y+currBlock.diam)
+        && (x+diam/2) >= currBlock.x
+        && (x-diam/2) <= (currBlock.x+currBlock.diam)) {
+        vx = -vx;
+      }
+    }
+  }
+  
 }
