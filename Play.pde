@@ -24,7 +24,7 @@ class Play {
   boolean isEasy;
   boolean gameover;
 
-
+  // Play constructor
   public Play(boolean isEasy, Leaderboard leaderboard) {
     this.isEasy = isEasy;
     gameover = false;
@@ -64,6 +64,7 @@ class Play {
     bg = loadImage("ocean-background.png");
   }
 
+  // displays Play screen
   public void display() {
     // background
     imageMode(CORNER);
@@ -140,6 +141,7 @@ class Play {
     return currScreen;
   }
   
+  // allows player to type username
   public void typeUsername() {
     if (key >= 'a' && key <= 'z' || key >= '0' && key <= '9') {
       username = username+key;
@@ -155,11 +157,13 @@ class Play {
     }
   }
   
+  // updates difficulty
   void updateDifficulty(boolean isEasy) {
     this.isEasy = isEasy;
     cat.isEasy = isEasy;
   }
 
+  // displays blocks and handles block collisions
   void handleBlocks() {
     if (!gameover) {
       displayBlocks();
@@ -167,6 +171,7 @@ class Play {
     }
   }
 
+  // handles block appearances/disappearances
   void displayBlocks() {
     rectMode(CORNER);
     // time handling inspired by
@@ -194,6 +199,7 @@ class Play {
     }
   }
   
+  // displays treats and handles treat collisions
   void handleTreats(){
     for (Treat treat : treats) {
       treat.display();
@@ -201,11 +207,12 @@ class Play {
     handleTreatCollision(cat);
   }
   
-    
+  // handle treat collisions by removing treat after collision
   void handleTreatCollision(Cat currCat){
     for (int i=0; i<treats.size(); i++) {
       if(treats.get(i).isHittingTreat(currCat))
       {
+        // remove treat after cat collides with it
         treats.remove(i);
         points++;
         treats.add(new Treat(random(20, width-20), random(0, height/2)));

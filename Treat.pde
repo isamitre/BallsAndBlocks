@@ -2,15 +2,19 @@ class Treat {
   float x, y;
   float diam = 20;
   
+  // Treat constructor
   public Treat(float x, float y) {
     this.x = x-x%diam;
     this.y = y-y%diam;
   }
+  
+  // displays treat
   void display() {
     fill(0, 255, 0);
     rect(x, y, diam, diam);
   }
   
+  // returns if cat is hitting treat
   boolean isHittingTreat(Cat cat) { 
     // cat hitting treat vertically
     if ( (cat.x+cat.diam/2) >= x

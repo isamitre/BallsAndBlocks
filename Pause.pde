@@ -4,6 +4,7 @@ class Pause {
   Button gameBtn;
   Button menuBtn;
 
+  // Pause constructor
   public Pause() {
     gameBtn  = new Button(width/2, height*.3, 130, 50, "back to game");
     menuBtn = new Button(width/2, height*.6, 100, 50, "main menu");
@@ -11,6 +12,7 @@ class Pause {
     im.filter(BLUR, 6);
   }
 
+  // displays Pause screen
   public void display() {
     background(255);
     image(im, 0, 0, width, height);
