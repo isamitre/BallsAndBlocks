@@ -30,6 +30,7 @@ void draw() {
     play.display();
     play.updateDifficulty(menu.isEasy);
   }
+  // set current screen to pause mode
   else if (currScreen == "pause") {
     pause.display();
   }
