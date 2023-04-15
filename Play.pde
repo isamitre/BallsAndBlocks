@@ -75,15 +75,15 @@ class Play {
       image(hand, mouseX, mouseY, barX, barY);
     }
 
-    //  cat
-    cat.update();
-    cat.display();
-
     // block handling
     handleBlocks();
     
     // treat handling
     handleTreats();
+
+    //  cat
+    cat.update();
+    cat.display();
     
     //display score
     fill(0);
@@ -93,6 +93,7 @@ class Play {
     // gameover
     gameover = cat.gameover;
     if (gameover) {
+      textAlign(CENTER);
       rectMode(CENTER);
       strokeWeight(3);
       fill(#8fb8ea, 240);
@@ -102,7 +103,6 @@ class Play {
       text("GAMEOVER!", width/2, height*0.3);
       
       if (!addedToLeaderboard && leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points) {
-        textAlign(CENTER);
         textLeading(20);
         
         // option of adding to leaderboard
