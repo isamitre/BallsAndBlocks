@@ -2,6 +2,7 @@ Menu menu;
 Play play;
 Pause pause;
 Leaderboard leaderboard;
+Rules rules;
 String currScreen;
 PImage im;
 color[] colors = new color[]{#355070, #6D5976, #B56576, #E56B6F, #EAAC8B};
@@ -13,6 +14,7 @@ void setup() {
   menu = new Menu();
   leaderboard = new Leaderboard();
   play = new Play(true, leaderboard);
+  rules = new Rules();
   pause = new Pause();
   im = loadImage("ocean-background.png");
 }
@@ -32,6 +34,9 @@ void draw() {
   }
   else if (currScreen == "pause") {
     pause.display();
+  }
+  else if (currScreen == "rules") {
+    rules.display();
   }
   // set current screen to leaderboard page
   else if (currScreen == "leaderboard") {
@@ -79,7 +84,10 @@ void mousePressed() {
       currScreen = "play";
     }
   }
-  
+  // rules screen button functionality
+  if (currScreen == "rules") {
+    currScreen = rules.updateScreen(currScreen);
+  }
   // leaderboard screen button functionality
   if (currScreen == "leaderboard") {
     currScreen = leaderboard.updateScreen(currScreen);
