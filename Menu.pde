@@ -5,6 +5,7 @@ class Menu {
   Button leaderboardBtn;
   boolean isEasy;
 
+  // Menu constructor
   public Menu() {
     playBtn = new Button(width/2, height/5, 100, 50, "play");
     diffBtn = new Button(width/2, height/3, 140, 40, "difficulty: easy");
@@ -13,6 +14,7 @@ class Menu {
     isEasy = true;
   }
 
+  // displays Menu screen
   public void display() {
     strokeWeight(1);
     rectMode(CENTER);
@@ -43,6 +45,7 @@ class Menu {
     return currScreen;
   }
 
+  // changes difficulty to the opposite
   public void changeDifficulty() {
     // change difficulty from easy to hard
     if (diffBtn.text == "difficulty: easy") {

@@ -24,7 +24,7 @@ class Play {
   boolean isEasy;
   boolean gameover;
 
-
+  // Play constructor
   public Play(boolean isEasy, Leaderboard leaderboard) {
     this.isEasy = isEasy;
     gameover = false;
@@ -64,6 +64,7 @@ class Play {
     bg = loadImage("ocean-background.png");
   }
 
+  // displays Play screen
   public void display() {
     // background
     imageMode(CORNER);
@@ -75,15 +76,15 @@ class Play {
       image(hand, mouseX, mouseY, barX, barY);
     }
 
-    //  cat
-    cat.update();
-    cat.display();
-
     // block handling
     handleBlocks();
     
     // treat handling
     handleTreats();
+
+    //  cat
+    cat.update();
+    cat.display();
     
     //display score
     fill(0);
@@ -93,16 +94,17 @@ class Play {
     // gameover
     gameover = cat.gameover;
     if (gameover) {
+      textAlign(CENTER);
       rectMode(CENTER);
       strokeWeight(3);
       fill(#8fb8ea, 240);
       rect(width/2, height/2, width*0.6, height*0.6, 20);
       
       fill(0);
-      textAlign(CENTER);
-      text("GAME OVER!", width/2, height*0.3);
+      text("GAMEOVER!", width/2, height*0.3);
       
-      if (!addedToLeaderboard && leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points) {
+      // add to leaderboard popup
+      if (!addedToLeaderboard && (leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points)) {
         textLeading(20);
         
         // option of adding to leaderboard
@@ -116,7 +118,9 @@ class Play {
         rect(width/2, height*0.64, width*0.3, 40, 10);
         fill(0);
         text(username, width/2, height*0.66);
-      } else {
+      } 
+      // play again / menu button popup
+      else {
         // display buttons
         playAgainBtn.display();
         menuBtn.display();
@@ -126,7 +130,7 @@ class Play {
   
   // returns what currScreen should be
   public String updateScreen(String currScreen) {
-    if ( !(!addedToLeaderboard && leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points)) {
+    if ( !(!addedToLeaderboard && (leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points))) {
       if (playAgainBtn.mouseOver()) {
         return "play2";
       } 
@@ -137,7 +141,8 @@ class Play {
     return currScreen;
   }
   
-  public void typeName() {
+  // allows player to type username
+  public void typeUsername() {
     if (key >= 'a' && key <= 'z' || key >= '0' && key <= '9') {
       username = username+key;
     }
@@ -152,18 +157,21 @@ class Play {
     }
   }
   
+  // updates difficulty
   void updateDifficulty(boolean isEasy) {
     this.isEasy = isEasy;
     cat.isEasy = isEasy;
   }
 
+  // displays blocks and handles block collisions
   void handleBlocks() {
     if (!gameover) {
       displayBlocks();
-      handleBlockCollisions(cat);
+      cat.handleBlockCollisions(blocks);
     }
   }
 
+  // handles block appearances/disappearances
   void displayBlocks() {
     rectMode(CORNER);
     // time handling inspired by
@@ -191,6 +199,7 @@ class Play {
     }
   }
   
+  // displays treats and handles treat collisions
   void handleTreats(){
     for (Treat treat : treats) {
       treat.display();
@@ -198,47 +207,15 @@ class Play {
     handleTreatCollision(cat);
   }
   
-  void handleBlockCollisions(Cat currCat) {
-    for (Block currBlock : blocks) {
-      // vertical block collision with cat, change cat's y direction
-      if ( (currCat.x+currCat.diam/2) >= currBlock.x
-        && (currCat.x-currCat.diam/2) <= (currBlock.x+currBlock.diam)
-        && (currCat.y+currCat.diam/2) >= currBlock.y
-        && (currCat.y-currCat.diam/2) <= (currBlock.y+currBlock.diam)) {
-        currCat.vy = -currCat.vy;
-      }
-      // horizontal block collision with cat, change cat's x direction
-      if ( (currCat.y+currCat.diam/2) >= currBlock.y
-        && (currCat.y-currCat.diam/2) <= (currBlock.y+currBlock.diam)
-        && (currCat.x+currCat.diam/2) >= currBlock.x
-        && (currCat.x-currCat.diam/2) <= (currBlock.x+currBlock.diam)) {
-        currCat.vx = -currCat.vx;
-      }
-    }
-    
-    
-  }
-  
+  // handle treat collisions by removing treat after collision
   void handleTreatCollision(Cat currCat){
     for (int i=0; i<treats.size(); i++) {
-      if(treats.get(i).isHittingCat(currCat))
+      if(treats.get(i).isHittingTreat(currCat))
       {
+        // remove treat after cat collides with it
         treats.remove(i);
         points++;
         treats.add(new Treat(random(20, width-20), random(0, height/2)));
-        i--;
-      }
-      else{
-        for(Block currBlock: blocks)
-        {
-          if(treats.get(i).isHittingBlock(currBlock.x, currBlock.y, currBlock.diam))
-          {
-            treats.remove(i);
-            i--;
-            treats.add(new Treat(random(20, width-20), random(0, height/2)));
-            break;
-          }
-        }
       }
     }
   }
