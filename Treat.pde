@@ -12,12 +12,28 @@ class Treat {
   }
   
   boolean isHittingTreat(Cat cat) { 
-    if(dist(cat.x, 0, x, 0) <= diam && dist(cat.y, 0, y, 0) <= diam) {
-      // Cat hit treat
+    // cat hitting treat vertically
+    if ( (cat.x+cat.diam/2) >= x
+      && (cat.x-cat.diam/2) <= (x+diam)
+      && (cat.y+cat.diam/2) >= y
+      && (cat.y-cat.diam/2) <= (y+diam)) {
+      return  true;
+    }  
+    // cat hitting treat horizontally
+    if ( (cat.y+cat.diam/2) >= y
+      && (cat.y-cat.diam/2) <= (y+diam)
+      && (cat.x+cat.diam/2) >= x
+      && (cat.x-cat.diam/2) <= (x+diam)) {
       return true;
     }
-    else
-      return false;
+    return false;
+    
+    //if(dist(cat.x, 0, x, 0) <= diam && dist(cat.y, 0, y, 0) <= diam) {
+    //  // Cat hit treat
+    //  return true;
+    //}
+    //else
+    //  return false;
     // Cat isn't hitting treat
     /*if ((xB-x)*(cat.x-x) + (yB-y)*(cat.y-y) <= 0) {
       return false;
