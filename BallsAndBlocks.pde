@@ -51,7 +51,7 @@ void keyPressed() {
       currScreen = "pause";
     }
     if (play.gameover) {
-      play.typeName();
+      play.typeUsername();
     }
   }
 }

@@ -102,7 +102,8 @@ class Play {
       fill(0);
       text("GAMEOVER!", width/2, height*0.3);
       
-      if (!addedToLeaderboard && leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points) {
+      // add to leaderboard popup
+      if (!addedToLeaderboard && (leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points)) {
         textLeading(20);
         
         // option of adding to leaderboard
@@ -116,7 +117,9 @@ class Play {
         rect(width/2, height*0.64, width*0.3, 40, 10);
         fill(0);
         text(username, width/2, height*0.66);
-      } else {
+      } 
+      // play again / menu button popup
+      else {
         // display buttons
         playAgainBtn.display();
         menuBtn.display();
@@ -126,7 +129,7 @@ class Play {
   
   // returns what currScreen should be
   public String updateScreen(String currScreen) {
-    if ( !(!addedToLeaderboard && leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points)) {
+    if ( !(!addedToLeaderboard && (leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points))) {
       if (playAgainBtn.mouseOver()) {
         return "play2";
       } 
@@ -137,7 +140,7 @@ class Play {
     return currScreen;
   }
   
-  public void typeName() {
+  public void typeUsername() {
     if (key >= 'a' && key <= 'z' || key >= '0' && key <= '9') {
       username = username+key;
     }
@@ -160,7 +163,7 @@ class Play {
   void handleBlocks() {
     if (!gameover) {
       displayBlocks();
-      handleBlockCollisions(cat);
+      cat.handleBlockCollisions(blocks);
     }
   }
 
@@ -198,25 +201,7 @@ class Play {
     handleTreatCollision(cat);
   }
   
-  void handleBlockCollisions(Cat currCat) {
-    for (Block currBlock : blocks) {
-      // vertical block collision with cat, change cat's y direction
-      if ( (currCat.x+currCat.diam/2) >= currBlock.x
-        && (currCat.x-currCat.diam/2) <= (currBlock.x+currBlock.diam)
-        && (currCat.y+currCat.diam/2) >= currBlock.y
-        && (currCat.y-currCat.diam/2) <= (currBlock.y+currBlock.diam)) {
-        currCat.vy = -currCat.vy;
-      }
-      // horizontal block collision with cat, change cat's x direction
-      if ( (currCat.y+currCat.diam/2) >= currBlock.y
-        && (currCat.y-currCat.diam/2) <= (currBlock.y+currBlock.diam)
-        && (currCat.x+currCat.diam/2) >= currBlock.x
-        && (currCat.x-currCat.diam/2) <= (currBlock.x+currBlock.diam)) {
-        currCat.vx = -currCat.vx;
-      }
-    }
-  }
-  
+    
   void handleTreatCollision(Cat currCat){
     for (int i=0; i<treats.size(); i++) {
       if(treats.get(i).isHittingTreat(currCat))
