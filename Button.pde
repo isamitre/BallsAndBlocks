@@ -23,9 +23,9 @@ class Button {
     strokeWeight(1);
 
     if (mouseOver()) {
-      fill(180);
+      fill(220, 220, 255);
     } else {
-      fill(200);
+      fill(255);
     }
     rect(x, y, w, h, 20);
     fill(0);

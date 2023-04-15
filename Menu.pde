@@ -1,13 +1,15 @@
 class Menu {
   Button playBtn;
   Button diffBtn;
+  Button rulesBtn;
   Button leaderboardBtn;
   boolean isEasy;
 
   // Menu constructor
   public Menu() {
     playBtn = new Button(width/2, height/5, 100, 50, "play");
-    diffBtn = new Button(width/2, height/2, 70, 40, "easy");
+    diffBtn = new Button(width/2, height/3, 140, 40, "difficulty: easy");
+    rulesBtn = new Button(width/2, height*.55, 70, 40, "rules");
     leaderboardBtn = new Button(width/2, height*.7, 140, 50, "leaderboard");
     isEasy = true;
   }
@@ -20,6 +22,8 @@ class Menu {
     playBtn.display();
     // difficulty button
     diffBtn.display();
+    // instruction button
+    rulesBtn.display();
     // leaderboard button
     leaderboardBtn.display();
   }
@@ -32,6 +36,9 @@ class Menu {
     if (leaderboardBtn.mouseOver()) {
       return "leaderboard";
     }
+    if (rulesBtn.mouseOver()){
+      return "rules";
+    }
     if (diffBtn.mouseOver()) {
       changeDifficulty();
     }
@@ -41,13 +48,13 @@ class Menu {
   // changes difficulty to the opposite
   public void changeDifficulty() {
     // change difficulty from easy to hard
-    if (diffBtn.text == "easy") {
-      diffBtn.text = "hard";
+    if (diffBtn.text == "difficulty: easy") {
+      diffBtn.text = "difficulty: hard";
       isEasy = false;
     }
     // change difficulty from hard to easy
-    else if (diffBtn.text == "hard") {
-      diffBtn.text = "easy";
+    else if (diffBtn.text == "difficulty: hard") {
+      diffBtn.text = "difficulty: easy";
       isEasy = true;
     }
   }
