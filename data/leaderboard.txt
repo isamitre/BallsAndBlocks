@@ -1,1 +1,5 @@
-isa	0
+isa9	9
+isa5	5
+isa5	5
+isa3	3
+isa3	3

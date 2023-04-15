@@ -30,6 +30,7 @@ void draw() {
     play.display();
     play.updateDifficulty(menu.isEasy);
   }
+  // set current screen to pause mode
   else if (currScreen == "pause") {
     pause.display();
   }
@@ -46,11 +47,13 @@ void draw() {
 
 void keyPressed() {
   if (currScreen == "play") {
+    // set screen to pause if spacebar is pressed
     if (key == ' ') {
       currScreen = "pause";
     }
+    // allow user to type username if gameover
     if (play.gameover) {
-      play.typeName();
+      play.typeUsername();
     }
   }
 }

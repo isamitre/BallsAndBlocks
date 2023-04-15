@@ -6,20 +6,22 @@ class Button {
   float w, h;
   String text;
 
+  // Button constructor
   public Button(float x, float y, float w, float h, String text) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.text = text;
-}
-  
+  }
+
+  // display button
   public void display() {
     rectMode(CENTER);
     textAlign(CENTER, CENTER);
     textSize(20);
     strokeWeight(1);
-    
+
     if (mouseOver()) {
       fill(180);
     } else {
@@ -34,6 +36,7 @@ class Button {
     text(text, x, y-3);
   }
   
+  // check if mouse is over button
   public boolean mouseOver() {
     float distX = x - mouseX;
     float distY = y - mouseY;
@@ -43,5 +46,4 @@ class Button {
     }
     return false;
   }
-  
 }

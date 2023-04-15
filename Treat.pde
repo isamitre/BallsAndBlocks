@@ -1,26 +1,43 @@
 class Treat {
   float x, y;
-  float xB, yB;
   float diam = 20;
   
+  // Treat constructor
   public Treat(float x, float y) {
-    this.x = x;
-    this.y = y;
-    xB = x+diam;
-    yB = y+diam;
+    this.x = x-x%diam;
+    this.y = y-y%diam;
   }
+  
+  // displays treat
   void display() {
     fill(0, 255, 0);
     rect(x, y, diam, diam);
   }
   
+  // returns if cat is hitting treat
   boolean isHittingTreat(Cat cat) { 
-    if(dist(cat.x, 0, x, 0) <= diam && dist(cat.y, 0, y, 0) <= diam) {
-      // Cat hit treat
+    // cat hitting treat vertically
+    if ( (cat.x+cat.diam/2) >= x
+      && (cat.x-cat.diam/2) <= (x+diam)
+      && (cat.y+cat.diam/2) >= y
+      && (cat.y-cat.diam/2) <= (y+diam)) {
+      return  true;
+    }  
+    // cat hitting treat horizontally
+    if ( (cat.y+cat.diam/2) >= y
+      && (cat.y-cat.diam/2) <= (y+diam)
+      && (cat.x+cat.diam/2) >= x
+      && (cat.x-cat.diam/2) <= (x+diam)) {
       return true;
     }
-    else
-      return false;
+    return false;
+    
+    //if(dist(cat.x, 0, x, 0) <= diam && dist(cat.y, 0, y, 0) <= diam) {
+    //  // Cat hit treat
+    //  return true;
+    //}
+    //else
+    //  return false;
     // Cat isn't hitting treat
     /*if ((xB-x)*(cat.x-x) + (yB-y)*(cat.y-y) <= 0) {
       return false;
