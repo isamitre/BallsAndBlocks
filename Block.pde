@@ -3,8 +3,8 @@ class Block {
   float diam = 20;
   
   public Block(float x, float y) {
-    this.x = x;
-    this.y = y;
+    this.x = x-x%diam;
+    this.y = y-y%diam;
   }
   
   void display() {
