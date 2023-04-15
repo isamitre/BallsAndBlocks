@@ -1,13 +1,10 @@
 class Treat {
   float x, y;
-  float xB, yB;
   float diam = 20;
   
   public Treat(float x, float y) {
-    this.x = x;
-    this.y = y;
-    xB = x+diam;
-    yB = y+diam;
+    this.x = x-x%diam;
+    this.y = y-y%diam;
   }
   void display() {
     fill(0, 255, 0);
