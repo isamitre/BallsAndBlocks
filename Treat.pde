@@ -14,17 +14,21 @@ class Treat {
     rect(x, y, diam, diam);
   }
   
-  boolean isHittingTreat(Cat cat) { 
+  boolean isHittingCat(Cat cat) { 
     if(dist(cat.x, 0, x, 0) <= diam && dist(cat.y, 0, y, 0) <= diam) {
       // Cat hit treat
       return true;
     }
     else
       return false;
-    // Cat isn't hitting treat
-    /*if ((xB-x)*(cat.x-x) + (yB-y)*(cat.y-y) <= 0) {
-      return false;
+  }
+  
+    boolean isHittingBlock(float bx, float by, float bsize) { 
+    if(dist(bx, 0, x, 0) <= bsize && dist(by, 0, y, 0) <= bsize) {
+      // Box collide treat
+      return true;
     }
-    */
+    else
+      return false;
   }
 }

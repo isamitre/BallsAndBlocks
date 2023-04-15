@@ -99,10 +99,10 @@ class Play {
       rect(width/2, height/2, width*0.6, height*0.6, 20);
       
       fill(0);
-      text("GAMEOVER!", width/2, height*0.3);
+      textAlign(CENTER);
+      text("GAME OVER!", width/2, height*0.3);
       
       if (!addedToLeaderboard && leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points) {
-        textAlign(CENTER);
         textLeading(20);
         
         // option of adding to leaderboard
@@ -215,15 +215,30 @@ class Play {
         currCat.vx = -currCat.vx;
       }
     }
+    
+    
   }
   
   void handleTreatCollision(Cat currCat){
     for (int i=0; i<treats.size(); i++) {
-      if(treats.get(i).isHittingTreat(currCat))
+      if(treats.get(i).isHittingCat(currCat))
       {
         treats.remove(i);
         points++;
         treats.add(new Treat(random(20, width-20), random(0, height/2)));
+        i--;
+      }
+      else{
+        for(Block currBlock: blocks)
+        {
+          if(treats.get(i).isHittingBlock(currBlock.x, currBlock.y, currBlock.diam))
+          {
+            treats.remove(i);
+            i--;
+            treats.add(new Treat(random(20, width-20), random(0, height/2)));
+            break;
+          }
+        }
       }
     }
   }
