@@ -201,10 +201,12 @@ class Play {
   
   // displays treats and handles treat collisions
   void handleTreats(){
-    for (Treat treat : treats) {
-      treat.display();
+    if (!gameover) {
+      for (Treat treat : treats) {
+        treat.display();
+      }
+      handleTreatCollision(cat);
     }
-    handleTreatCollision(cat);
   }
   
   // handle treat collisions by removing treat after collision
