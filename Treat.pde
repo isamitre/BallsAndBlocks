@@ -1,18 +1,22 @@
 class Treat {
   float x, y;
   float diam = 20;
-  
-  // Treat constructor
+  PImage icon;
+    
   public Treat(float x, float y) {
     this.x = x-x%diam;
     this.y = y-y%diam;
+    icon = loadImage("fish.png");
   }
   
   // displays treat
   void display() {
-    fill(0, 255, 0);
+    fill(#4137BC);  // color needs to be fixed
     rect(x, y, diam, diam);
+    imageMode(CORNER);
+    image(icon, x, y, diam, diam);
   }
+
   
   // returns if cat is hitting treat
   boolean isHittingTreat(Cat cat) { 
