@@ -8,14 +8,16 @@ class Cat {
   float spinSpeed;
   boolean isEasy;
   boolean gameover;
+  SoundFile hitSound;
 
   // Cat constructor
-  public Cat(float x, float y, float bx, float by, boolean isEasy) {
+  public Cat(float x, float y, float bx, float by, boolean isEasy, SoundFile hitSound) {
     this.x = x;
     this.y = y;
     barX = bx;
     barY = by;
     this.isEasy = isEasy;
+    this.hitSound = hitSound;
     gameover = false;
     // update Difficulty
     if (isEasy)
@@ -79,6 +81,8 @@ class Cat {
         && (y-diam/2) <= (currBlock.y+currBlock.diam)) {
         // vertical block collision with cat, change cat's y direction
         vy = -vy;
+        // play hit sound
+        hitSound.play();
       }
       if ( (y+diam/2) >= currBlock.y
         && (y-diam/2) <= (currBlock.y+currBlock.diam)
@@ -86,6 +90,8 @@ class Cat {
         && (x-diam/2) <= (currBlock.x+currBlock.diam)) {
         // horizontal block collision with cat, change cat's x direction
         vx = -vx;
+        // play hit sound
+        hitSound.play();
       }
     }
   }
