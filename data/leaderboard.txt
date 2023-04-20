@@ -1,7 +1,5 @@
 isabelm	12
 isabelm	10
 isa9	9
-nancy	8
-nancy	8
-isa5	5
+isabelm	8
 isa5	5
