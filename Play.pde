@@ -20,6 +20,8 @@ class Play {
   ArrayList<Block> blocks;
   
   ArrayList<Treat> treats;
+  
+  SoundFile backgroundSound;
   SoundFile treatSound;
   
   PImage hand;
@@ -28,7 +30,7 @@ class Play {
   boolean gameover;
 
   // Play constructor
-  public Play(boolean isEasy, Leaderboard leaderboard, SoundFile treatSound) {
+  public Play(boolean isEasy, Leaderboard leaderboard, SoundFile hitSound, SoundFile treatSound) {
     this.isEasy = isEasy;
     gameover = false;
     
@@ -39,10 +41,12 @@ class Play {
     
     barX = 100;
     barY = 40;
+    
+    this.treatSound = treatSound;
 
     playAgainBtn = new Button(width/2, height*.45, 100, 45, "play again");
     menuBtn = new Button(width/2, height*.6, 120, 45, "main menu");
-    cat = new Cat(300, 50, barX, barY, isEasy);
+    cat = new Cat(300, 50, barX, barY, isEasy, hitSound);
     
     blockTimer = millis();
     if (isEasy) {
@@ -61,9 +65,7 @@ class Play {
     treats = new ArrayList<Treat>();
     treats.add(new Treat(random(20, width-20), random(0, height/2)));
     treats.add(new Treat(random(20, width-20), random(0, height/2)));
-    treats.add(new Treat(random(20, width-20), random(0, height/2)));
-    
-    this.treatSound = treatSound;
+    treats.add(new Treat(random(20, width-20), random(0, height/2)));    
         
     hand = loadImage("hand.png");
     bg = loadImage("ocean-background.png");
@@ -74,7 +76,7 @@ class Play {
     // background
     imageMode(CORNER);
     image(bg, 0, 0, width, height);
-
+    
     // player-controlled hand
     if (!gameover) {
       imageMode(CENTER);
