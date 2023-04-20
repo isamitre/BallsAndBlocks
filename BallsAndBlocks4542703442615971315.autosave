@@ -15,9 +15,9 @@ void setup() {
   currScreen = "menu";
 
   backgroundSound = new SoundFile(this, "background.wav");
-  backgroundSound.amp(0.5);
   hitSound = new SoundFile(this, "hit.wav");
   treatSound = new SoundFile(this, "powerup.wav");
+  treatSound.amp(0.5);
 
   menu = new Menu();
   leaderboard = new Leaderboard();
