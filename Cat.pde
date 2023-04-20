@@ -81,24 +81,10 @@ class Cat {
         && (y+diam/2) >= currBlock.y
         && (y-diam/2) <= (currBlock.y+currBlock.diam)) {
 
-        println (abs(y+diam/2-currBlock.y),
-          abs(y-diam/2-(currBlock.y+currBlock.diam)),
-          abs(x+diam/2-currBlock.x),
-          abs(x-diam/2-(currBlock.x+currBlock.diam)));
-
-        // vertical block collision with cat, change cat's y direction
-        //if (abs(y+diam/2-currBlock.y) <= diffCheck
-        //  || abs(y-diam/2-(currBlock.y+currBlock.diam)) <= diffCheck) {
-        //  vy = -vy;
-        //  println("vertical");
-        //}
-
-        //// horizontal block collision with cat, change cat's x direction
-        //if (abs(x+diam/2-currBlock.x) <= diffCheck
-        //  || abs(x-diam/2-(currBlock.x+currBlock.diam)) <= diffCheck) {
-        //  vx = -vx;
-        //  println("horizontal");
-        //}
+        println ((currBlock.y-(y+diam/2)),
+          (y-diam/2-(currBlock.y+currBlock.diam)),
+          (currBlock.x-(x+diam/2)),
+          (x-diam/2-(currBlock.x+currBlock.diam)));
 
         float verticalCheck = min(abs(y+diam/2-currBlock.y), abs(y-diam/2-(currBlock.y+currBlock.diam)));
         float horizontalCheck = min(abs(x+diam/2-currBlock.x), abs(x-diam/2-(currBlock.x+currBlock.diam)));
@@ -107,17 +93,15 @@ class Cat {
         if (abs(verticalCheck - horizontalCheck) <= 3) {
           vx = -vx;
           vy = -vy;
-          println("both");
         }
         // vertical block collision with cat, change cat's y direction
         else if (verticalCheck < horizontalCheck) {
           vy = -vy;
-          println("vertical", vy);
+          //println("vertical", vy);
         }
         // horizontal block collision with cat, change cat's x direction
         else {
           vx = -vx;
-          println("horizontal", vx);
         }
 
         // play hit sound
