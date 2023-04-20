@@ -1,5 +1,5 @@
+nancy	11
 isa9	9
+nancy	8
+nancy	8
 isa5	5
-isa5	5
-isa3	3
-isa3	3
