@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 class Play {
 
   Cat cat;
@@ -19,13 +21,16 @@ class Play {
   
   ArrayList<Treat> treats;
   
+  SoundFile backgroundSound;
+  SoundFile treatSound;
+  
   PImage hand;
   PImage bg;
   boolean isEasy;
   boolean gameover;
 
   // Play constructor
-  public Play(boolean isEasy, Leaderboard leaderboard) {
+  public Play(boolean isEasy, Leaderboard leaderboard, SoundFile hitSound, SoundFile treatSound) {
     this.isEasy = isEasy;
     gameover = false;
     
@@ -36,10 +41,12 @@ class Play {
     
     barX = 100;
     barY = 40;
+    
+    this.treatSound = treatSound;
 
     playAgainBtn = new Button(width/2, height*.45, 100, 45, "play again");
     menuBtn = new Button(width/2, height*.6, 120, 45, "main menu");
-    cat = new Cat(300, 50, barX, barY, isEasy);
+    cat = new Cat(300, 50, barX, barY, isEasy, hitSound);
     
     blockTimer = millis();
     if (isEasy) {
@@ -58,8 +65,8 @@ class Play {
     treats = new ArrayList<Treat>();
     treats.add(new Treat(random(20, width-20), random(0, height/2)));
     treats.add(new Treat(random(20, width-20), random(0, height/2)));
-    treats.add(new Treat(random(20, width-20), random(0, height/2)));
-    
+    treats.add(new Treat(random(20, width-20), random(0, height/2)));    
+        
     hand = loadImage("hand.png");
     bg = loadImage("ocean-background.png");
   }
@@ -69,7 +76,7 @@ class Play {
     // background
     imageMode(CORNER);
     image(bg, 0, 0, width, height);
-
+    
     // player-controlled hand
     if (!gameover) {
       imageMode(CENTER);
@@ -214,11 +221,18 @@ class Play {
     for (int i=0; i<treats.size(); i++) {
       if(treats.get(i).isHittingTreat(currCat))
       {
+        // play treat sound
+        treatSound.play();
+        
         // remove treat after cat collides with it
         treats.remove(i);
         points++;
         treats.add(new Treat(random(20, width-20), random(0, height/2)));
       }
     }
+  }
+  
+  void setTreatSound(SoundFile treatSound) {
+    this.treatSound = treatSound;
   }
 }
