@@ -189,21 +189,8 @@ class Play {
     int elapsedTime = millis() - blockTimer;
     if (elapsedTime > blockSpawnTime*1000) {
       if (blocks.size() < maxBlocks ) {
-        
-        // create new block 
-        Block newBlock = new Block(random(30, width-30), random(30, height/3));
-        
-        // check newBlock's x is not too close to cat
-        while (abs(cat.x - newBlock.x + newBlock.diam/2) <= 2*newBlock.diam) {
-          newBlock.x = random(30, width-30);
-        }
-        // check newBlock's y is not too close to cat
-        while (abs(cat.y - newBlock.y + newBlock.diam/2) <= 2*newBlock.diam) {
-          newBlock.y = random(30, height/3);
-        }
-
         // add block
-        blocks.add(newBlock);
+        blocks.add(new Block(cat, treats));
 
         // blockSpawnTime decreases until it is 2 seconds
         blockSpawnTime = max(blockSpawnTime/3, 2);
@@ -246,8 +233,5 @@ class Play {
       }
     }
   }
-  
-  void setTreatSound(SoundFile treatSound) {
-    this.treatSound = treatSound;
-  }
+    
 }
