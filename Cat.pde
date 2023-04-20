@@ -81,11 +81,6 @@ class Cat {
         && (y+diam/2) >= currBlock.y
         && (y-diam/2) <= (currBlock.y+currBlock.diam)) {
 
-        println ((currBlock.y-(y+diam/2)),
-          (y-diam/2-(currBlock.y+currBlock.diam)),
-          (currBlock.x-(x+diam/2)),
-          (x-diam/2-(currBlock.x+currBlock.diam)));
-
         float verticalCheck = min(abs(y+diam/2-currBlock.y), abs(y-diam/2-(currBlock.y+currBlock.diam)));
         float horizontalCheck = min(abs(x+diam/2-currBlock.x), abs(x-diam/2-(currBlock.x+currBlock.diam)));
 
