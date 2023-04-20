@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 class Play {
 
   Cat cat;
@@ -18,6 +20,7 @@ class Play {
   ArrayList<Block> blocks;
   
   ArrayList<Treat> treats;
+  SoundFile treatSound;
   
   PImage hand;
   PImage bg;
@@ -25,7 +28,7 @@ class Play {
   boolean gameover;
 
   // Play constructor
-  public Play(boolean isEasy, Leaderboard leaderboard) {
+  public Play(boolean isEasy, Leaderboard leaderboard, SoundFile treatSound) {
     this.isEasy = isEasy;
     gameover = false;
     
@@ -60,6 +63,8 @@ class Play {
     treats.add(new Treat(random(20, width-20), random(0, height/2)));
     treats.add(new Treat(random(20, width-20), random(0, height/2)));
     
+    this.treatSound = treatSound;
+        
     hand = loadImage("hand.png");
     bg = loadImage("ocean-background.png");
   }
@@ -214,11 +219,18 @@ class Play {
     for (int i=0; i<treats.size(); i++) {
       if(treats.get(i).isHittingTreat(currCat))
       {
+        // play treat sound
+        treatSound.play();
+        
         // remove treat after cat collides with it
         treats.remove(i);
         points++;
         treats.add(new Treat(random(20, width-20), random(0, height/2)));
       }
     }
+  }
+  
+  void setTreatSound(SoundFile treatSound) {
+    this.treatSound = treatSound;
   }
 }
