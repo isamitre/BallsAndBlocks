@@ -47,6 +47,7 @@ class Play {
     barX = 100;
     barY = 40;
 
+    volumeOn = true;
     this.treatSound = treatSound;
     this.treatSound.amp(0.3);
 

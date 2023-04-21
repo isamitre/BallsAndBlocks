@@ -9,7 +9,7 @@ class Pause {
   // Pause constructor
   public Pause() {
     gameBtn  = new Button(width/2, height*.3, 130, 50, "back to game");
-    muteBtn = new Button(width/2, height*0.45, 40, 50, "mute");
+    muteBtn = new Button(width/2, height*0.45, 80, 50, "mute");
     menuBtn = new Button(width/2, height*.6, 100, 50, "main menu");
     im = loadImage("ocean-background.png");
     im.filter(BLUR, 6);
@@ -21,6 +21,7 @@ class Pause {
     image(im, 0, 0, width, height);
     rectMode(CENTER);
     gameBtn.display();
+    muteBtn.display();
     menuBtn.display();
   }
 
