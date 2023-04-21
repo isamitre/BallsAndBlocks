@@ -8,9 +8,9 @@ class Pause {
 
   // Pause constructor
   public Pause() {
-    gameBtn  = new Button(width/2, height*.3, 130, 50, "back to game");
-    muteBtn = new Button(width/2, height*0.45, 80, 50, "mute");
-    menuBtn = new Button(width/2, height*.6, 110, 50, "main menu");
+    gameBtn  = new Button(width/2, height*.3, 130, 45, "back to game");
+    muteBtn = new Button(width/2, height*0.45, 80, 45, "mute");
+    menuBtn = new Button(width/2, height*.6, 115, 45, "main menu");
     im = loadImage("ocean-background.png");
     im.filter(BLUR, 6);
   }
