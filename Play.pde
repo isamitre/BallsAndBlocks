@@ -23,6 +23,7 @@ class Play {
 
   ArrayList<Treat> treats;
 
+  boolean volumeOn;
   SoundFile backgroundSound;
   SoundFile treatSound;
 
@@ -231,8 +232,10 @@ class Play {
       Treat currTreat = treats.get(i);
       if (currTreat.isHittingTreat(currCat))
       {
-        // play treat sound
-        treatSound.play();
+        if (volumeOn) {
+          // play treat sound
+          treatSound.play();
+        }
 
         // remove treat after cat collides with it
         treats.remove(i);
