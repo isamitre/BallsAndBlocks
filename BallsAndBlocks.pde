@@ -30,7 +30,7 @@ void setup() {
 void draw() {
   imageMode(CORNER);
   image(im, 0, 0, width, height);
-  
+
   // play background music continuously
   if (!backgroundSound.isPlaying() && play.volumeOn) {
     backgroundSound.play();

@@ -36,7 +36,7 @@ class Menu {
     if (leaderboardBtn.mouseOver()) {
       return "leaderboard";
     }
-    if (rulesBtn.mouseOver()){
+    if (rulesBtn.mouseOver()) {
       return "rules";
     }
     if (diffBtn.mouseOver()) {
