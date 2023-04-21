@@ -35,7 +35,7 @@ class Button {
     }
     text(text, x, y-3);
   }
-  
+
   // check if mouse is over button
   public boolean mouseOver() {
     float distX = x - mouseX;

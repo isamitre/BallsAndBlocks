@@ -62,7 +62,7 @@ class Leaderboard {
     }
     return currScreen;
   }
-  
+
   // populates topEntries with entries from leaderboard.txt
   public void getEntriesFromFile() {
     // based on https://processing.org/reference/createReader_.html
@@ -100,7 +100,7 @@ class Leaderboard {
     for (Entry currEntry : topEntries) {
       output.println(currEntry.getUsername() + "\t" + currEntry.getPoints());
     }
-    
+
     output.flush();
     output.close();
   }

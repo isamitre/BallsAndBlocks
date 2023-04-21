@@ -2,7 +2,7 @@ class Treat {
   float x, y;
   float diam = 20;
   PImage fish;
-  
+
   public Treat(float x, float y) {
     this.x = x;
     this.y = y;
@@ -18,14 +18,13 @@ class Treat {
       // make x and y a multiple of 20
       x = x-x%diam;
       y = y-y%diam;
-      
     } while (grid.isSpaceOccupied(x, y));
-    
+
     grid.setOccupancy(x, y, true);
 
     fish = loadImage("fish.png");
   }
-  
+
   // displays treat
   void display() {
     strokeWeight(1);
