@@ -5,8 +5,8 @@ class Block {
   // block constructor
   public Block(Cat cat, Grid grid) {
     do {
-      x = random(0, width-diam);
-      y = random(0, height/3);
+      x = random(diam, width-diam);
+      y = random(diam, height/3);
 
       // make x and y a multiple of 20
       x = x-x%diam;
