@@ -2,28 +2,30 @@ import processing.sound.*;
 
 class Play {
 
+  Grid grid;
+
   Cat cat;
   float barX, barY;
-  
+
   Button playAgainBtn;
   Button menuBtn;
-  
+
   int points;
   String username;
   Leaderboard leaderboard;
   boolean addedToLeaderboard;
-  
+
   int blockTimer;
   int blockSpawnTime;
   int minBlockSpawnTime;
   int maxBlocks;
   ArrayList<Block> blocks;
-  
+
   ArrayList<Treat> treats;
-  
+
   SoundFile backgroundSound;
   SoundFile treatSound;
-  
+
   PImage hand;
   PImage bg;
   boolean isEasy;
@@ -31,24 +33,26 @@ class Play {
 
   // Play constructor
   public Play(boolean isEasy, Leaderboard leaderboard, SoundFile hitSound, SoundFile treatSound) {
+    grid = new Grid();
+
     this.isEasy = isEasy;
     gameover = false;
-    
+
     points = 0;
     username = "";
     this.leaderboard = leaderboard;
     addedToLeaderboard = false;
-    
+
     barX = 100;
     barY = 40;
-    
+
     this.treatSound = treatSound;
     this.treatSound.amp(0.3);
-    
+
     playAgainBtn = new Button(width/2, height*.45, 100, 45, "play again");
     menuBtn = new Button(width/2, height*.6, 120, 45, "main menu");
     cat = new Cat(300, 50, barX, barY, isEasy, hitSound);
-    
+
     blockTimer = millis();
     if (isEasy) {
       // easy mode
@@ -62,12 +66,12 @@ class Play {
       maxBlocks = 15;
     }
     blocks = new ArrayList<Block>();
-    
+
     treats = new ArrayList<Treat>();
-    treats.add(new Treat(random(20, width-20), random(0, height/2)));
-    treats.add(new Treat(random(20, width-20), random(0, height/2)));
-    treats.add(new Treat(random(20, width-20), random(0, height/2)));    
-        
+    treats.add(new Treat(grid));
+    treats.add(new Treat(grid));
+    treats.add(new Treat(grid));
+
     hand = loadImage("hand.png");
     bg = loadImage("ocean-background.png");
   }
@@ -77,7 +81,7 @@ class Play {
     // background
     imageMode(CORNER);
     image(bg, 0, 0, width, height);
-    
+
     // player-controlled hand
     if (!gameover) {
       imageMode(CENTER);
@@ -86,19 +90,19 @@ class Play {
 
     // block handling
     handleBlocks();
-    
+
     // treat handling
     handleTreats();
 
     //  cat
     cat.update();
     cat.display();
-    
+
     //display score
     fill(0);
     textAlign(CORNER);
     text("Score: " + points, 5, height-10);
-    
+
     // gameover
     gameover = cat.gameover;
     if (gameover) {
@@ -107,26 +111,26 @@ class Play {
       strokeWeight(3);
       fill(#8fb8ea, 240);
       rect(width/2, height/2, width*0.6, height*0.6, 20);
-      
+
       fill(0);
       text("GAMEOVER!", width/2, height*0.3);
-      
+
       // add to leaderboard popup
       if (!addedToLeaderboard && (leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points)) {
         textLeading(20);
-        
+
         // option of adding to leaderboard
         text("Congrats! You're in the top " + leaderboard.maxPlayers + ". ", width/2, height*0.4);
         text("Add your username to the leaderboard!", width/2, height*0.48);
         text("Type username here: ", width/2, height*0.56);
-        
+
         // where to type username
         fill(250);
         strokeWeight(1);
         rect(width/2, height*0.64, width*0.3, 40, 10);
         fill(0);
         text(username, width/2, height*0.66);
-      } 
+      }
       // play again / menu button popup
       else {
         // display buttons
@@ -135,20 +139,20 @@ class Play {
       }
     }
   }
-  
+
   // returns what currScreen should be
   public String updateScreen(String currScreen) {
     if ( !(!addedToLeaderboard && (leaderboard.topEntries.size() < leaderboard.maxPlayers || leaderboard.getLastEntry().getPoints() < points))) {
       if (playAgainBtn.mouseOver()) {
         return "play2";
-      } 
+      }
       if (menuBtn.mouseOver()) {
         return "menu";
       }
     }
     return currScreen;
   }
-  
+
   // allows player to type username
   public void typeUsername() {
     if (key >= 'a' && key <= 'z' || key >= '0' && key <= '9') {
@@ -164,7 +168,7 @@ class Play {
       addedToLeaderboard = true;
     }
   }
-  
+
   // updates difficulty
   void updateDifficulty(boolean isEasy) {
     this.isEasy = isEasy;
@@ -182,32 +186,22 @@ class Play {
   // handles block appearances/disappearances
   void displayBlocks() {
     rectMode(CORNER);
-    // time handling inspired by
+    // time handling modeled after
     // https://stackoverflow.com/questions/12417937/create-a-simple-countdown-in-processing
-    
+
     // blocks appear every blockSpawnTime
     int elapsedTime = millis() - blockTimer;
     if (elapsedTime > blockSpawnTime*1000) {
       if (blocks.size() < maxBlocks ) {
-        
-        // create new block 
-        Block newBlock = new Block(random(30, width-30), random(30, height/3));
-        
-        // check newBlock's x is not too close to cat
-        while (abs(cat.x - newBlock.x + newBlock.diam/2) <= 2*newBlock.diam) {
-          newBlock.x = random(30, width-30);
-        }
-        // check newBlock's y is not too close to cat
-        while (abs(cat.y - newBlock.y + newBlock.diam/2) <= 2*newBlock.diam) {
-          newBlock.y = random(30, height/3);
-        }
-
         // add block
-        blocks.add(newBlock);
+        blocks.add(new Block(grid));
 
         // blockSpawnTime decreases until it is 2 seconds
         blockSpawnTime = max(blockSpawnTime/3, 2);
       } else {
+        // update grid
+        grid.setOccupancy(blocks.get(0).x, blocks.get(0).y, false);
+
         // remove block
         blocks.remove(0);
       }
@@ -220,9 +214,9 @@ class Play {
       currBlock.display();
     }
   }
-  
+
   // displays treats and handles treat collisions
-  void handleTreats(){
+  void handleTreats() {
     if (!gameover) {
       for (Treat treat : treats) {
         treat.display();
@@ -230,24 +224,28 @@ class Play {
       handleTreatCollision(cat);
     }
   }
-  
+
   // handle treat collisions by removing treat after collision
-  void handleTreatCollision(Cat currCat){
+  void handleTreatCollision(Cat currCat) {
     for (int i=0; i<treats.size(); i++) {
-      if(treats.get(i).isHittingTreat(currCat))
+      Treat currTreat = treats.get(i);
+      if (currTreat.isHittingTreat(currCat))
       {
         // play treat sound
         treatSound.play();
-        
+
         // remove treat after cat collides with it
         treats.remove(i);
+
+        // update grid
+        grid.setOccupancy(currTreat.x, currTreat.y, false);
+
+        // increase player's points
         points++;
-        treats.add(new Treat(random(20, width-20), random(0, height/2)));
+
+        // add new treat
+        treats.add(new Treat(grid));
       }
     }
-  }
-  
-  void setTreatSound(SoundFile treatSound) {
-    this.treatSound = treatSound;
   }
 }
