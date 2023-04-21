@@ -19,6 +19,7 @@ class Cat {
     barY = by;
     this.isEasy = isEasy;
     this.hitSound = hitSound;
+    this.hitSound.amp(0.5);
     volumeOn = true;
     gameover = false;
     // update Difficulty

@@ -31,7 +31,7 @@ class Leaderboard {
     strokeWeight(3);
     rect(width/2, height/2, width*0.8, height*0.8, 20);
 
-    // leaderboard rectangle
+    // leaderboard text rectangle
     fill(#8fb8ea);
     rect(width/2, height*0.1, 150, 50, 20);
     textAlign(CENTER, CENTER);

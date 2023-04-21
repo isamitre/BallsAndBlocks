@@ -9,7 +9,7 @@ class Menu {
   public Menu() {
     playBtn = new Button(width/2, height/5, 100, 50, "play");
     diffBtn = new Button(width/2, height/3, 140, 40, "difficulty: easy");
-    rulesBtn = new Button(width/2, height*.55, 70, 40, "rules");
+    rulesBtn = new Button(width/2, height*.55, 130, 40, "how to play");
     leaderboardBtn = new Button(width/2, height*.7, 140, 50, "leaderboard");
     isEasy = true;
   }
