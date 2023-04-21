@@ -6,8 +6,8 @@ class Treat {
   public Treat(Grid grid) {
 
     do {
-      x = random(0, width-diam);
-      y = random(0, height/2);
+      x = random(diam, width-diam);
+      y = random(diam, height/2);
 
       // make x and y a multiple of 20
       x = x-x%diam;

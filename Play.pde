@@ -194,7 +194,7 @@ class Play {
     if (elapsedTime > blockSpawnTime*1000) {
       if (blocks.size() < maxBlocks ) {
         // add block
-        blocks.add(new Block(grid));
+        blocks.add(new Block(cat, grid));
 
         // blockSpawnTime decreases until it is 2 seconds
         blockSpawnTime = max(blockSpawnTime/3, 2);
