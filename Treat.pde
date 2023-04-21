@@ -28,7 +28,9 @@ class Treat {
   
   // displays treat
   void display() {
-    fill(#4137BC);  // color needs to be fixed
+    strokeWeight(1);
+    fill(#4137BC);
+    rectMode(CORNER);
     rect(x, y, diam, diam);
     imageMode(CORNER);
     image(fish, x, y, diam, diam);
@@ -45,17 +47,5 @@ class Treat {
       return  true;
     }
     return false;
-
-    //if(dist(cat.x, 0, x, 0) <= diam && dist(cat.y, 0, y, 0) <= diam) {
-    //  // Cat hit treat
-    //  return true;
-    //}
-    //else
-    //  return false;
-    // Cat isn't hitting treat
-    /*if ((xB-x)*(cat.x-x) + (yB-y)*(cat.y-y) <= 0) {
-     return false;
-     }
-     */
   }
 }
