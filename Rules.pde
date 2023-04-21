@@ -2,16 +2,19 @@
 class Rules {
   Button menuBtn;
   PImage hand;
-  PImage treat;
-  
+  PImage cat;
+  Treat treat;
+
   ArrayList<String> rules;
-  
+
   int rulesStartY = height/4+10;
+  int barX = 100;
+  int barY = 40;
 
   // Rules constructor
   public Rules() {
     menuBtn = new Button(width*0.95, 30, 30, 30, "—\n—\n—");
-    
+
     // how to play instructions/rules
     rules = new ArrayList<>();
     rules.add("Move the hand with your mouse.");
@@ -19,10 +22,12 @@ class Rules {
     rules.add("Make the cat happy by getting treats! This will \nincrease your points.");
     rules.add("If you score high enough, you'll get to go on the \nleaderboard!");
     rules.add("Pause by pressing the spacebar.");
-    
+
     // images
     hand = loadImage("hand.png");
-icon = loadImage("fish.png");  }
+    cat = loadImage("cat1.png");
+    treat = new Treat(490, 195);
+  }
 
   // displays Rules screen
   public void display() {
@@ -51,8 +56,12 @@ icon = loadImage("fish.png");  }
     text(rules.get(2), width*0.15, rulesStartY+40*2+20);
     text(rules.get(3), width*0.15, rulesStartY+40*3+20*2);
     text(rules.get(4), width*0.15, rulesStartY+40*4+20*3);
-    
-    // hand image
+
+    // example images
+    imageMode(CENTER);
+    image(hand, 435, 105, barX*0.7, barY*0.7);  // hand
+    image(cat, 490, 160, 25, 25);               // cat
+    treat.display();                            // treat
   }
 
   // returns what currScreen should be
