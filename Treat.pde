@@ -1,7 +1,13 @@
 class Treat {
   float x, y;
   float diam = 20;
-  PImage icon;
+  PImage fish;
+  
+  public Treat(float x, float y) {
+    this.x = x;
+    this.y = y;
+    fish = loadImage("fish.png");
+  }
 
   public Treat(Grid grid) {
 
@@ -17,7 +23,7 @@ class Treat {
     
     grid.setOccupancy(x, y, true);
 
-    icon = loadImage("fish.png");
+    fish = loadImage("fish.png");
   }
   
   // displays treat
@@ -25,7 +31,7 @@ class Treat {
     fill(#4137BC);  // color needs to be fixed
     rect(x, y, diam, diam);
     imageMode(CORNER);
-    image(icon, x, y, diam, diam);
+    image(fish, x, y, diam, diam);
   }
 
 

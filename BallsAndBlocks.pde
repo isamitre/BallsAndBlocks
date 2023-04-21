@@ -80,6 +80,7 @@ void keyPressed() {
 }
 
 void mousePressed() {
+  println(mouseX, mouseY);
   // menu screen button functionality
   if (currScreen == "menu") {
     currScreen = menu.updateScreen(currScreen);
