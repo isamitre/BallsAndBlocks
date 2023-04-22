@@ -90,14 +90,12 @@ class Play {
       if(keyPressed==true)
       {
       if (keyCode == LEFT) {
-      print("leftie");
       barR++;
-    }
-    else if (keyCode == RIGHT)
-    {
-      print("rightie");
-      barR--;
-    }
+      }
+      else if (keyCode == RIGHT)
+      {
+        barR--;
+      }
       }
       imageMode(CENTER);
       pushMatrix();
@@ -189,12 +187,10 @@ class Play {
   }
   public void handleHandRotations() {
     if (keyCode == LEFT) {
-      print("leftie");
       barR++;
     }
     else if (keyCode == RIGHT)
     {
-      print("rightie");
       barR--;
     }
   }
