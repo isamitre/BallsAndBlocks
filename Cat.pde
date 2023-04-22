@@ -38,7 +38,7 @@ class Cat {
     vx = 0;
     diam = 25;
     angle = random(0, TWO_PI);
-    icon = loadImage("cat.png");
+    icon = loadImage("cat1.png");
   }
 
   // update cat location and check for bar/wall collisions
