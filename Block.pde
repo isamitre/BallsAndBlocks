@@ -1,7 +1,7 @@
 class Block {
   float x, y;
   float diam = 20;
-
+  PImage box;
   // block constructor
   public Block(Cat cat, Grid grid) {
     do {
@@ -12,14 +12,15 @@ class Block {
       x = x-x%diam;
       y = y-y%diam;
     } while (grid.isSpaceOccupied(x, y) || isTooCloseToCat(cat));
-
+    
     grid.setOccupancy(x, y, true);
+    box = loadImage("box.png");
   }
 
   // display block
   void display() {
-    fill(0);
-    rect(x, y, diam, diam);
+    imageMode(CORNER);
+    image(box, x, y, diam, diam);
   }
 
   // returns whether the block coordinates are too close to cat
