@@ -30,10 +30,14 @@ void setup() {
 void draw() {
   imageMode(CORNER);
   image(im, 0, 0, width, height);
-  
+
   // play background music continuously
-  if (!backgroundSound.isPlaying()) {
+  if (!backgroundSound.isPlaying() && play.volumeOn) {
     backgroundSound.play();
+  }
+  // puase background music if playing and music was muted
+  if (backgroundSound.isPlaying() && !play.volumeOn) {
+    backgroundSound.stop();
   }
 
   // set current screen to main menu
@@ -88,6 +92,7 @@ void mousePressed() {
   // pause screen button functionality
   if (currScreen == "pause") {
     currScreen = pause.updateScreen(currScreen);
+    play.volumeOn = pause.volumeOn;
   }
 
   // play screen button functionality

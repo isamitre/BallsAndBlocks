@@ -3,15 +3,15 @@ class Block {
   float diam = 20;
 
   // block constructor
-  public Block(Grid grid) {
+  public Block(Cat cat, Grid grid) {
     do {
-      x = random(0, width-diam);
-      y = random(0, height/3);
+      x = random(diam, width-diam);
+      y = random(diam, height/3);
 
       // make x and y a multiple of 20
       x = x-x%diam;
       y = y-y%diam;
-    } while (grid.isSpaceOccupied(x, y));
+    } while (grid.isSpaceOccupied(x, y) || isTooCloseToCat(cat));
 
     grid.setOccupancy(x, y, true);
   }

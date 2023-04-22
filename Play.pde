@@ -23,6 +23,7 @@ class Play {
 
   ArrayList<Treat> treats;
 
+  boolean volumeOn;
   SoundFile backgroundSound;
   SoundFile treatSound;
 
@@ -46,6 +47,7 @@ class Play {
     barX = 100;
     barY = 40;
 
+    volumeOn = true;
     this.treatSound = treatSound;
     this.treatSound.amp(0.3);
 
@@ -194,7 +196,7 @@ class Play {
     if (elapsedTime > blockSpawnTime*1000) {
       if (blocks.size() < maxBlocks ) {
         // add block
-        blocks.add(new Block(grid));
+        blocks.add(new Block(cat, grid));
 
         // blockSpawnTime decreases until it is 2 seconds
         blockSpawnTime = max(blockSpawnTime/3, 2);
@@ -231,8 +233,10 @@ class Play {
       Treat currTreat = treats.get(i);
       if (currTreat.isHittingTreat(currCat))
       {
-        // play treat sound
-        treatSound.play();
+        if (volumeOn) {
+          // play treat sound
+          treatSound.play();
+        }
 
         // remove treat after cat collides with it
         treats.remove(i);

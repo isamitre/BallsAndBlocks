@@ -8,6 +8,7 @@ class Cat {
   float spinSpeed;
   boolean isEasy;
   boolean gameover;
+  boolean volumeOn;
   SoundFile hitSound;
 
   // Cat constructor
@@ -18,6 +19,8 @@ class Cat {
     barY = by;
     this.isEasy = isEasy;
     this.hitSound = hitSound;
+    this.hitSound.amp(0.5);
+    volumeOn = true;
     gameover = false;
     // update Difficulty
     if (isEasy)
@@ -92,15 +95,16 @@ class Cat {
         // vertical block collision with cat, change cat's y direction
         else if (verticalCheck < horizontalCheck) {
           vy = -vy;
-          //println("vertical", vy);
         }
         // horizontal block collision with cat, change cat's x direction
         else {
           vx = -vx;
         }
 
-        // play hit sound
-        hitSound.play();
+        if (volumeOn) {
+          // play hit sound
+          hitSound.play();
+        }
       }
     }
   }

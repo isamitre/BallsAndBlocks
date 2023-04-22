@@ -1,31 +1,38 @@
 class Treat {
   float x, y;
   float diam = 20;
-  PImage icon;
+  PImage fish;
+
+  public Treat(float x, float y) {
+    this.x = x;
+    this.y = y;
+    fish = loadImage("fish.png");
+  }
 
   public Treat(Grid grid) {
 
     do {
-      x = random(0, width-diam);
-      y = random(0, height/2);
+      x = random(diam, width-diam);
+      y = random(diam, height/2);
 
       // make x and y a multiple of 20
       x = x-x%diam;
       y = y-y%diam;
-      
     } while (grid.isSpaceOccupied(x, y));
-    
+
     grid.setOccupancy(x, y, true);
 
-    icon = loadImage("fish.png");
+    fish = loadImage("fish.png");
   }
-  
+
   // displays treat
   void display() {
-    fill(#4137BC);  // color needs to be fixed
+    strokeWeight(1);
+    fill(#4137BC);
+    rectMode(CORNER);
     rect(x, y, diam, diam);
     imageMode(CORNER);
-    image(icon, x, y, diam, diam);
+    image(fish, x, y, diam, diam);
   }
 
 
@@ -39,17 +46,5 @@ class Treat {
       return  true;
     }
     return false;
-
-    //if(dist(cat.x, 0, x, 0) <= diam && dist(cat.y, 0, y, 0) <= diam) {
-    //  // Cat hit treat
-    //  return true;
-    //}
-    //else
-    //  return false;
-    // Cat isn't hitting treat
-    /*if ((xB-x)*(cat.x-x) + (yB-y)*(cat.y-y) <= 0) {
-     return false;
-     }
-     */
   }
 }
