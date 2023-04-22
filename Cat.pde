@@ -48,8 +48,8 @@ class Cat {
     x += vx;
     
     //calculate rotation
-    float
-    barR*(PI/8)
+    //float
+    //barR*(PI/8)
     //Check for bar collision
     if (y + diam >=height) {
       gameover = true; //IS THIS NECESSARY?
