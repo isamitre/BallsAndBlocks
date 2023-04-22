@@ -46,7 +46,10 @@ class Cat {
     y += vy;
     vy +=g;
     x += vx;
-
+    
+    //calculate rotation
+    //float
+    //barR*(PI/8)
     //Check for bar collision
     if (y + diam >=height) {
       gameover = true; //IS THIS NECESSARY?
@@ -74,7 +77,6 @@ class Cat {
     image(icon, 0, 0, diam, diam);
     popMatrix();
   }
-
   // change cat direction based on block collisions
   void handleBlockCollisions(ArrayList<Block> blocks) {
     for (Block currBlock : blocks) {
