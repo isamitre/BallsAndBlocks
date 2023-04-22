@@ -13,6 +13,7 @@ class Pause {
     menuBtn = new Button(width/2, height*.6, 115, 45, "main menu");
     im = loadImage("ocean-background.png");
     im.filter(BLUR, 6);
+    volumeOn = true;
   }
 
   // displays Pause screen
