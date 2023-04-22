@@ -5,7 +5,7 @@ class Play {
   Grid grid;
 
   Cat cat;
-  float barX, barY;
+  float barX, barY, barR;
 
   Button playAgainBtn;
   Button menuBtn;
@@ -46,6 +46,7 @@ class Play {
 
     barX = 100;
     barY = 40;
+    barR = 0;
 
     volumeOn = true;
     this.treatSound = treatSound;
@@ -53,7 +54,7 @@ class Play {
 
     playAgainBtn = new Button(width/2, height*.45, 100, 45, "play again");
     menuBtn = new Button(width/2, height*.6, 120, 45, "main menu");
-    cat = new Cat(300, 50, barX, barY, isEasy, hitSound);
+    cat = new Cat(300, 50, barX, barY, barR, isEasy, hitSound);
 
     blockTimer = millis();
     if (isEasy) {
@@ -86,8 +87,24 @@ class Play {
 
     // player-controlled hand
     if (!gameover) {
+      if(keyPressed==true)
+      {
+      if (keyCode == LEFT) {
+      print("leftie");
+      barR++;
+    }
+    else if (keyCode == RIGHT)
+    {
+      print("rightie");
+      barR--;
+    }
+      }
       imageMode(CENTER);
-      image(hand, mouseX, mouseY, barX, barY);
+      pushMatrix();
+      translate(mouseX,mouseY);
+      rotate(barR*(PI/8));
+      image(hand, 0, 0, barX, barY);
+      popMatrix();
     }
 
     // block handling
@@ -168,6 +185,17 @@ class Play {
     if (keyCode == ENTER) {
       leaderboard.addEntry(username, points);
       addedToLeaderboard = true;
+    }
+  }
+  public void handleHandRotations() {
+    if (keyCode == LEFT) {
+      print("leftie");
+      barR++;
+    }
+    else if (keyCode == RIGHT)
+    {
+      print("rightie");
+      barR--;
     }
   }
 
@@ -252,4 +280,5 @@ class Play {
       }
     }
   }
+  
 }

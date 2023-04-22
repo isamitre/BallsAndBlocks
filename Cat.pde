@@ -4,7 +4,7 @@ class Cat {
   float diam;
   float angle;
   PImage icon;
-  float barX, barY;
+  float barX, barY, barR;
   float spinSpeed;
   boolean isEasy;
   boolean gameover;
@@ -12,11 +12,12 @@ class Cat {
   SoundFile hitSound;
 
   // Cat constructor
-  public Cat(float x, float y, float bx, float by, boolean isEasy, SoundFile hitSound) {
+  public Cat(float x, float y, float bx, float by, float br, boolean isEasy, SoundFile hitSound) {
     this.x = x;
     this.y = y;
     barX = bx;
     barY = by;
+    barR = br;
     this.isEasy = isEasy;
     this.hitSound = hitSound;
     this.hitSound.amp(0.5);
@@ -49,8 +50,7 @@ class Cat {
     //Check for bar collision
     if (y + diam >=height) {
       gameover = true; //IS THIS NECESSARY?
-    } else if (y + diam/2>= mouseY-barY/2-10 && y + diam/2 <= mouseY+barY/2+10
-      && x>=mouseX-barX/2 && x<=mouseX+barX/2 && vy>0) {
+    } else if (y + diam/2>= mouseY-barY/2-10 && y + diam/2 <= mouseY+barY/2+10 && x>=mouseX-barX/2 && x<=mouseX+barX/2 && vy>0) {
       vy = speed;
       y = mouseY-barY/2-diam/2;
       vx = map(x, mouseX-barX/2, mouseX+barX/2, -5, 5);
