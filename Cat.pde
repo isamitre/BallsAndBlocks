@@ -42,14 +42,16 @@ class Cat {
   }
 
   // update cat location and check for bar/wall collisions
-  void update() {
+  void update(float br) {
     y += vy;
     vy +=g;
     x += vx;
     
+    barR = br;
+    
     //calculate rotation
     PVector[] vertices = createBarVertices(barX, barY, barR);
-    
+
     Boolean collider = handleBarCollision(vertices, x, y);
     if (y + diam >=height) {
       gameover = true; //IS THIS NECESSARY?
@@ -57,7 +59,8 @@ class Cat {
      else if (collider) {
       vy = speed;
       y = mouseY-barY/2-diam/2;
-      vx = map(x, mouseX-barX/2, mouseX+barX/2, -5, 5) + barR*(PI/12);
+      //vx = map(x, mouseX-barX/2, mouseX+barX/2, -5, 5);
+      vx = (barR*(PI/12))*10;
     }
 
     //Wall collision
@@ -84,33 +87,33 @@ class Cat {
     float sinVal = sin(barR*(PI/12));
     float cosVal = cos(barR*(PI/12));
     
-    float xR = (mouseX+barX/2)*cosVal - (mouseY-barY/2-10)*sinVal;
-    float yR = (mouseY-barY/2-10)*cosVal + (mouseX+barX/2)*sinVal;
-    vertices[0] = new PVector(xR,yR);
-     xR = (mouseX-barX/2)*cosVal - (mouseY-barY/2-10)*sinVal;
-     yR = (mouseY-barY/2-10)*cosVal + (mouseX-barX/2)*sinVal;
-    vertices[1] = new PVector(xR,yR);
-     xR = (mouseX+barX/2)*cosVal - (mouseY+barY/2-10)*sinVal;
-     yR = (mouseY+barY/2-10)*cosVal + (mouseX+barX/2)*sinVal;
-    vertices[2] = new PVector(xR,yR);
-     xR = (mouseX-barX/2)*cosVal - (mouseY+barY/2-10)*sinVal;
-     yR = (mouseY+barY/2-10)*cosVal + (mouseX-barX/2)*sinVal;
-    vertices[3] = new PVector(xR,yR);
+    float xR = ((mouseX+barX/2)-mouseX)*cosVal - ((mouseY-barY/2-10)-mouseY)*sinVal;
+    float yR = ((mouseY-barY/2-10)-mouseY)*cosVal + ((mouseX+barX/2)-mouseX)*sinVal;
+    vertices[0] = new PVector(xR+mouseX,yR+mouseY);
+     xR = ((mouseX-barX/2)-mouseX)*cosVal - ((mouseY-barY/2-10)-mouseY)*sinVal;
+     yR = ((mouseY-barY/2-10)-mouseY)*cosVal + ((mouseX-barX/2)-mouseX)*sinVal;
+    vertices[1] = new PVector(xR+mouseX,yR+mouseY);
+     xR = ((mouseX+barX/2)-mouseX)*cosVal - ((mouseY+barY/2-10)-mouseY)*sinVal;
+     yR = ((mouseY+barY/2-10)-mouseY)*cosVal + ((mouseX+barX/2)-mouseX)*sinVal;
+    vertices[2] = new PVector(xR+mouseX,yR+mouseY);
+     xR = ((mouseX-barX/2)-mouseX)*cosVal - ((mouseY+barY/2-10)-mouseY)*sinVal;
+     yR = ((mouseY+barY/2-10)-mouseY)*cosVal + ((mouseX-barX/2)-mouseX)*sinVal;
+    vertices[3] = new PVector(xR+mouseX,yR+mouseY);
     return vertices;
   }
   Boolean handleBarCollision(PVector[] vertices, float px, float py)
   {
     boolean collides = false;
-  
-    // go through each of the vertices, plus
-    // the next vertex in the list
     int next = 0;
     for (int i=0; i<vertices.length; i++) {
-  
-      // get next vertex in list
-      // if we've hit the end, wrap around to 0
-      next = i+1;
-      if (next == vertices.length) next = 0;
+      if (next == vertices.length-1) 
+      {
+        next = 0;
+      }
+      else
+      {
+        next = i+1;
+      }
       PVector vNext = vertices[next];
       PVector vCurrent = vertices[i];      
       if (((vCurrent.y >= py && vNext.y < py) || (vCurrent.y < py && vNext.y >= py)) && (px < (vNext.x-vCurrent.x)*(py-vCurrent.y) / (vNext.y-vCurrent.y)+vCurrent.x)) {
@@ -120,6 +123,7 @@ class Cat {
     return collides;
     
   }
+  
   // change cat direction based on block collisions
   void handleBlockCollisions(ArrayList<Block> blocks) {
     for (Block currBlock : blocks) {

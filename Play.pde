@@ -89,13 +89,15 @@ class Play {
     if (!gameover) {
       if(keyPressed==true)
       {
-      if (keyCode == LEFT) {
-      barR++;
-      }
-      else if (keyCode == RIGHT)
-      {
+        if (keyCode == LEFT || key == 'a') {
         barR--;
-      }
+        barR = barR%24;
+        }
+        else if (keyCode == RIGHT || key == 'd')
+        {
+          barR++;
+          barR = barR%24;
+        }
       }
       imageMode(CENTER);
       pushMatrix();
@@ -112,7 +114,7 @@ class Play {
     handleTreats();
 
     //  cat
-    cat.update();
+    cat.update(barR);
     cat.display();
 
     //display score
@@ -183,15 +185,6 @@ class Play {
     if (keyCode == ENTER) {
       leaderboard.addEntry(username, points);
       addedToLeaderboard = true;
-    }
-  }
-  public void handleHandRotations() {
-    if (keyCode == LEFT || key == 'a' || key == 'A') {
-      barR++;
-    }
-    else if (keyCode == RIGHT || key == 'b' || key == 'B')
-    {
-      barR--;
     }
   }
 
