@@ -27,10 +27,10 @@ class Treat {
 
   // displays treat
   void display() {
-    strokeWeight(1);
-    fill(#4137BC);
-    rectMode(CORNER);
-    rect(x, y, diam, diam);
+    //strokeWeight(1);
+    //fill(#4137BC);
+    //rectMode(CORNER);
+    //rect(x, y, diam, diam);
     imageMode(CORNER);
     image(fish, x, y, diam, diam);
   }

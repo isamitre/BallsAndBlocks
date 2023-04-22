@@ -1,2 +1,5 @@
 isabelm	34
-asd	0
+s	4
+s	2
+sasd	1
+asdd	1

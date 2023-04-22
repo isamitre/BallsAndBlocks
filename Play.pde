@@ -100,7 +100,7 @@ class Play {
       imageMode(CENTER);
       pushMatrix();
       translate(mouseX,mouseY);
-      rotate(barR*(PI/8));
+      rotate(barR*(PI/12));
       image(hand, 0, 0, barX, barY);
       popMatrix();
     }
@@ -186,10 +186,10 @@ class Play {
     }
   }
   public void handleHandRotations() {
-    if (keyCode == LEFT) {
+    if (keyCode == LEFT || key == 'a' || key == 'A') {
       barR++;
     }
-    else if (keyCode == RIGHT)
+    else if (keyCode == RIGHT || key == 'b' || key == 'B')
     {
       barR--;
     }
