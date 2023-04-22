@@ -60,7 +60,7 @@ class Cat {
       vy = speed;
       y = mouseY-barY/2-diam/2;
       //vx = map(x, mouseX-barX/2, mouseX+barX/2, -5, 5);
-      vx = (barR*(PI/12))*10;
+      vx = (barR*(PI/36))*10;
     }
 
     //Wall collision
@@ -84,8 +84,8 @@ class Cat {
   PVector[] createBarVertices(float barX, float barY, float barR)
   {
     PVector[] vertices = new PVector[4];
-    float sinVal = sin(barR*(PI/12));
-    float cosVal = cos(barR*(PI/12));
+    float sinVal = sin(barR*(PI/36));
+    float cosVal = cos(barR*(PI/36));
     
     float xR = ((mouseX+barX/2)-mouseX)*cosVal - ((mouseY-barY/2-10)-mouseY)*sinVal;
     float yR = ((mouseY-barY/2-10)-mouseY)*cosVal + ((mouseX+barX/2)-mouseX)*sinVal;

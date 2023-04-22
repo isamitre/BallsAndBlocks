@@ -91,18 +91,18 @@ class Play {
       {
         if (keyCode == LEFT || key == 'a') {
         barR--;
-        barR = barR%24;
+        barR = barR%36;
         }
         else if (keyCode == RIGHT || key == 'd')
         {
           barR++;
-          barR = barR%24;
+          barR = barR%36;
         }
       }
       imageMode(CENTER);
       pushMatrix();
       translate(mouseX,mouseY);
-      rotate(barR*(PI/12));
+      rotate(barR*(PI/36));
       image(hand, 0, 0, barX, barY);
       popMatrix();
     }

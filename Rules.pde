@@ -7,7 +7,7 @@ class Rules {
 
   ArrayList<String> rules;
 
-  int rulesStartY = height/4+10;
+  int rulesStartY = height/4;
   int barX = 100;
   int barY = 40;
 
@@ -17,7 +17,7 @@ class Rules {
 
     // how to play instructions/rules
     rules = new ArrayList<>();
-    rules.add("Move the hand with your mouse.");
+    rules.add("Move the hand with your mouse. \nPress 'a' to rotate the hand left and\n'd' to rotate the hand right ");
     rules.add("Prevent the cat from falling in the water by \nletting it bounce on your hand.");
     rules.add("Make the cat happy by getting treats! This will \nincrease your points.");
     rules.add("If you score high enough, you'll get to go on the \nleaderboard!");
@@ -26,7 +26,7 @@ class Rules {
     // images
     hand = loadImage("hand.png");
     cat = loadImage("cat1.png");
-    treat = new Treat(490, 195);
+    treat = new Treat(490, 220);
   }
 
   // displays Rules screen
@@ -52,15 +52,15 @@ class Rules {
     textLeading(25);
     textAlign(LEFT);
     text(rules.get(0), width*0.15, rulesStartY);
-    text(rules.get(1), width*0.15, rulesStartY+40);
-    text(rules.get(2), width*0.15, rulesStartY+40*2+20);
-    text(rules.get(3), width*0.15, rulesStartY+40*3+20*2);
-    text(rules.get(4), width*0.15, rulesStartY+40*4+20*3);
+    text(rules.get(1), width*0.15, rulesStartY+40*2);
+    text(rules.get(2), width*0.15, rulesStartY+40*3+15);
+    text(rules.get(3), width*0.15, rulesStartY+40*4+15*2);
+    text(rules.get(4), width*0.15, rulesStartY+40*5+15*3);
 
     // example images
     imageMode(CENTER);
     image(hand, 435, 105, barX*0.7, barY*0.7);  // hand
-    image(cat, 490, 160, 25, 25);               // cat
+    image(cat, 490, 180, 25, 25);               // cat
     treat.display();                            // treat
   }
 
